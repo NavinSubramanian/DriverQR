@@ -13,7 +13,7 @@ function QRCodeGenerator() {
   const handleGenerateQRCode = async () => {
     try {
       // Call Backend API to generate QR code and save user details
-      await axios.post('http://localhost:5000/generate-qrcode', {
+      await axios.post('https://driver-qr.vercel.app/generate-qrcode', {
         uniqueIdentifier: uniqueIdentifier,
         userDetails: {
           phoneNumber: phoneNumber,
