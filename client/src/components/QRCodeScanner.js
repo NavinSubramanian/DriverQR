@@ -22,6 +22,8 @@ function QRCodeScanner() {
 
     fetchUserDetails();
   }, [uniqueNumber]);
+  
+  console.log(userDetails)
 
   return (
     <div>
@@ -29,7 +31,7 @@ function QRCodeScanner() {
       {userDetails && (
         <div>
           <h2>User Details</h2>
-          <p><strong>Name:</strong> {userDetails.name}</p>
+          <p><strong>Blood Group:</strong> {userDetails.bloodGroup}</p>
           <p><strong>Phone Number:</strong> {userDetails.phoneNumber}</p>
           <p><strong>Address:</strong> {userDetails.address}</p>
           {/* Display other user details as needed */}
