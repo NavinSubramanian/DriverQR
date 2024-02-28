@@ -3,15 +3,16 @@
 import React from 'react';
 import QRCodeGenerator from './components/QRCodeGenerator';
 import QRCodeScanner from './components/QRCodeScanner';
+import { Route,BrowserRouter,Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <h1>QR Code Generator</h1>
-      <QRCodeGenerator />
-      <h1>QR Code Scanner</h1>
-      <QRCodeScanner />
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' Component={QRCodeGenerator}></Route>
+          <Route path='/user-details/:uniqueNumber' Component={QRCodeScanner}></Route>
+        </Routes>
+      </BrowserRouter>
   );
 }
 
