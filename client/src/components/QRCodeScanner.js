@@ -11,8 +11,7 @@ function QRCodeScanner() {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(`https://driver-qr.vercel.app/user-details/${uniqueNumber}`);
-        console.log(response);
-        setUserDetails(response.data.user); 
+        setUserDetails(response.data.user.userDetails); 
         setError(null);
       } catch (error) {
         console.error(error);
