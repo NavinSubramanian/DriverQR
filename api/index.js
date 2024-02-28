@@ -41,8 +41,7 @@ app.post('/generate-qrcode', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Error generating QR Code' });
   }
-});
-
+}); 
 
 
 app.post('/scan-qrcode', async (req, res) => {
@@ -67,17 +66,44 @@ app.post('/scan-qrcode', async (req, res) => {
 app.get('/user-details/:uniqueNumber', async (req, res) => {
   try {
     const { uniqueNumber } = req.params;
-    
-    const user = await User.findOne({ uniqueIdentifier: uniqueNumber });
-    
+
+    let user = await User.findOne({ uniqueIdentifier: uniqueNumber });
+
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(200).json({ message: 'User information not found', promptForInfo: true });
     }
-    
-    res.status(200).json({ user });
+
+    // If user found, send their details
+    res.status(200).json({ user, promptForInfo: false });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error fetching user details' });
+  }
+});
+
+app.post('/user-details', async (req, res) => {
+  try {
+    const { uniqueIdentifier, userDetails } = req.body;
+
+    // Check if user already exists
+    let user = await User.findOne({ uniqueIdentifier });
+
+    if (user) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    // Create new user with provided details
+    const newUser = new User({
+      uniqueIdentifier: uniqueIdentifier,
+      userDetails: userDetails,
+    });
+
+    await newUser.save();
+
+    res.status(200).json({ message: 'User details saved successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error saving user details' });
   }
 });
 

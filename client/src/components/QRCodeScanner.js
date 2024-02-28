@@ -2,27 +2,53 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+
+
 function QRCodeScanner() {
   const [userDetails, setUserDetails] = useState(null);
   const [error, setError] = useState(null);
+  const [showInfoPrompt, setShowInfoPrompt] = useState(false);
   const { uniqueNumber } = useParams();
 
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(`https://driver-qr.vercel.app/user-details/${uniqueNumber}`);
-        setUserDetails(response.data.user.userDetails); 
-        setError(null);
-      } catch (error) {
-        console.error(error);
-        setError('Error fetching user details');
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get(`https://driver-qr.vercel.app/user-details/${uniqueNumber}`);
+      const user = response.data.user.userDetails;
+      var existsInDB = true;
+      if(user.bloodGroup === ""){
+        existsInDB=false;
       }
-    };
+      console.log(user)
+      if (existsInDB) {
+        setUserDetails(user);
+        setError(null);
+      } else {
+        setShowInfoPrompt(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setError('Error fetching user details');
+    }
+  };
 
+
+  useEffect(() => {
     fetchUserDetails();
   }, [uniqueNumber]);
-  
-  console.log(userDetails)
+
+  const handleInfoSubmit = async (infoData) => {
+    try {
+      await axios.post('https://driver-qr.vercel.app/user-details', {
+        uniqueIdentifier: uniqueNumber,
+        userDetails: infoData,
+      });
+      // After submitting, fetch user details again to display
+      await fetchUserDetails();
+    } catch (error) {
+      console.error(error);
+      setError('Error saving user details');
+    }
+  };
 
   return (
     <div>
@@ -36,6 +62,48 @@ function QRCodeScanner() {
           {/* Display other user details as needed */}
         </div>
       )}
+      {showInfoPrompt && <InfoPrompt onSubmit={handleInfoSubmit} />}
+    </div>
+  );
+}
+
+
+  
+
+ 
+
+// InfoPrompt component
+function InfoPrompt({ onSubmit }) {
+  const [infoData, setInfoData] = useState({
+    bloodGroup: '',
+    phoneNumber: '',
+    address: '',
+    // Add other fields as needed
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInfoData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(infoData);
+  };
+
+  return (
+    <div>
+      <h2>Enter Your Information</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="bloodGroup" placeholder="Blood Group" value={infoData.bloodGroup} onChange={handleInputChange} />
+        <input type="text" name="phoneNumber" placeholder="Phone Number" value={infoData.phoneNumber} onChange={handleInputChange} />
+        <input type="text" name="address" placeholder="Address" value={infoData.address} onChange={handleInputChange} />
+        {/* Add other input fields for additional user details */}
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }

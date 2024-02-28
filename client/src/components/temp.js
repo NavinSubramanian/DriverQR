@@ -1,41 +1,38 @@
-// components/QRCodeScanner.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function QRCodeScanner() {
-  const [qrCodeData, setQRCodeData] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
   const [error, setError] = useState(null);
+  const { uniqueNumber } = useParams();
 
-  const handleScanQRCode = async () => {
-    try {
-      const response = await axios.post('http://localhost:5000/scan-qrcode', { qrCodeData });
-      setUserData(response.data.user);
-      setError(null);
-    } catch (error) {
-      console.error(error);
-      setError('Error scanning QR Code');
-      setUserData(null);
-    }
-  };
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`https://driver-qr.vercel.app/user-details/${uniqueNumber}`);
+        setUserDetails(response.data.user.userDetails); 
+        setError(null);
+      } catch (error) {
+        console.error(error);
+        setError('Error fetching user details');
+      }
+    };
+
+    fetchUserDetails();
+  }, [uniqueNumber]);
+  
+  console.log(userDetails)
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Scan QR Code"
-        value={qrCodeData}
-        onChange={(e) => setQRCodeData(e.target.value)}
-      />
-      <button onClick={handleScanQRCode}>Scan QR Code</button>
       {error && <p>{error}</p>}
-      {userData && (
+      {userDetails && (
         <div>
           <h2>User Details</h2>
-          <p>Phone Number: {userData.userDetails.phoneNumber}</p>
-          <p>Address: {userData.userDetails.address}</p>
-          <p>Blood Group: {userData.userDetails.bloodGroup}</p>
+          <p><strong>Blood Group:</strong> {userDetails.bloodGroup}</p>
+          <p><strong>Phone Number:</strong> {userDetails.phoneNumber}</p>
+          <p><strong>Address:</strong> {userDetails.address}</p>
           {/* Display other user details as needed */}
         </div>
       )}
