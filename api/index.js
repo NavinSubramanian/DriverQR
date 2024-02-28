@@ -24,7 +24,7 @@ db.once('open', () => console.log('Connected to MongoDB'));
 app.post('/generate-qrcode', async (req, res) => {
   try {
     // Generate QR Code
-    const websiteUrl = 'https://driver-qr-pj2y.vercel.app/';
+    const websiteUrl = 'https://driver-qr-pj2y.vercel.app/user-details/';
     const uniqueIdentifier = req.body.uniqueIdentifier;
     const qrCodeData = await QRCode.toDataURL(websiteUrl + uniqueIdentifier);
 
