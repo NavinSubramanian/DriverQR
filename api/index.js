@@ -63,3 +63,21 @@ app.post('/scan-qrcode', async (req, res) => {
     res.status(500).json({ message: 'Error scanning QR Code' });
   }
 });
+
+
+app.get('/user-details/:uniqueNumber', async (req, res) => {
+  try {
+    const { uniqueNumber } = req.params;
+
+    const user = await User.findOne({ uniqueIdentifier: uniqueNumber });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching user details' });
+  }
+});

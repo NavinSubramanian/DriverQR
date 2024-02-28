@@ -1,37 +1,37 @@
-// components/QRCodeScanner.js
-
-import React, { useState } from 'react';
-import { QrReader } from 'react-qr-reader';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function QRCodeScanner() {
-  const [qrCodeData, setQRCodeData] = useState('');
+  const [userDetails, setUserDetails] = useState(null);
   const [error, setError] = useState(null);
+  const { uniqueNumber } = useParams();
 
-  const handleScan = (data) => {
-    if (data) {
-      setQRCodeData(data);
-      setError(null);
-    }
-  };
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`https://driver-qr.vercel.app/user-details/${uniqueNumber}`);
+        setUserDetails(response.data.user);
+        setError(null);
+      } catch (error) {
+        console.error(error);
+        setError('Error fetching user details');
+      }
+    };
 
-  const handleError = (err) => {
-    console.error(err);
-    setError('Error scanning QR Code');
-  };
+    fetchUserDetails();
+  }, [uniqueNumber]);
 
   return (
-    <div className='qrVideo'>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: '100%' }}
-      />
+    <div>
       {error && <p>{error}</p>}
-      {qrCodeData && (
+      {userDetails && (
         <div>
-          <h2>QR Code Data</h2>
-          <p>{qrCodeData}</p>
+          <h2>User Details</h2>
+          <p><strong>Name:</strong> {userDetails.name}</p>
+          <p><strong>Phone Number:</strong> {userDetails.phoneNumber}</p>
+          <p><strong>Address:</strong> {userDetails.address}</p>
+          {/* Display other user details as needed */}
         </div>
       )}
     </div>
