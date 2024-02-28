@@ -38,7 +38,7 @@ function QRCodeScanner() {
   const handleInfoSubmit = async (infoData) => {
     try {
       // Send request to backend
-      await axios.post('https://driver-qr.vercel.app/user-details', {
+      await axios.post('https://driver-qr.vercel.app/update-details', {
         uniqueIdentifier: uniqueNumber,
         userDetails: infoData
       });

@@ -81,12 +81,12 @@ app.get('/user-details/:uniqueNumber', async (req, res) => {
   }
 });
 
-app.post('/user-details', async (req, res) => {
+app.post('/update-details', async (req, res) => {
   try {
 
     console.log(req)
     // Extract data from request body
-    const { uniqueIdentifier, userDetails } = req;
+    const { uniqueIdentifier, userDetails } = req.body;
 
     // Validate data
     if (!uniqueIdentifier || !userDetails) {
