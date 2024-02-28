@@ -18,7 +18,6 @@ function QRCodeScanner() {
       if(user.bloodGroup === ""){
         existsInDB=false;
       }
-      console.log(user)
       if (existsInDB) {
         setUserDetails(user);
         setError(null);
@@ -38,15 +37,16 @@ function QRCodeScanner() {
 
   const handleInfoSubmit = async (infoData) => {
     try {
+      // Send request to backend
       await axios.post('https://driver-qr.vercel.app/user-details', {
         uniqueIdentifier: uniqueNumber,
-        userDetails: infoData,
+        userDetails: infoData
       });
-      // After submitting, fetch user details again to display
-      await fetchUserDetails();
+      console.log('User details saved successfully:');
+      // Handle success message or redirect to another page
     } catch (error) {
-      console.error(error);
-      setError('Error saving user details');
+      console.error('Error saving user details:', error.message);
+      // Handle error message or display it to the user
     }
   };
 
