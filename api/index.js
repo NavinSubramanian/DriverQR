@@ -36,7 +36,7 @@ app.post('/generate-qrcode', async (req, res) => {
     });
     await newUser.save();
 
-    res.status(200).json({ message: 'QR Code generated and saved successfully' });
+    res.status(200).json({ qrCodeData: qrCodeData });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error generating QR Code' });

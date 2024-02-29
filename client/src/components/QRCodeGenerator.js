@@ -6,6 +6,7 @@ import axios from 'axios';
 import '../app.css'
 import Navbar from '../Navbar'
 import Login from './Login'
+import Qrcode from './Qrcode';
 
 function QRCodeGenerator() {
   const [uniqueIdentifier, setUniqueIdentifier] = useState('');
@@ -15,6 +16,9 @@ function QRCodeGenerator() {
   const [emergencyNumber, setEmergencyNumber] = useState('');
   const [gender, setGender] = useState('');
   const [bloodGroup, setBloodGroup] = useState('');
+  const [qrCodeData, setQrCodeData] = useState('');
+  const [showQRCode, setShowQRCode] = useState(false);
+  const [animate, setAnimate] = useState(false);
 
   const handleGenerateQRCode = async () => {
     try {
@@ -29,12 +33,20 @@ function QRCodeGenerator() {
           bloodGroup: bloodGroup,
         },
       });
-      console.log(response)
+      setQrCodeData(response.data.qrCodeData);
+      setShowQRCode(true);
+      setAnimate(true);
       alert('QR Code generated and user details saved successfully');
     } catch (error) {
       console.error(error);
       alert('Error generating QR Code');
     }
+  };
+
+  const handleClosePopup = () => {
+    // Close the pop-up
+    setShowQRCode(false);
+    setAnimate(false);
   };
 
   return (
@@ -92,7 +104,6 @@ function QRCodeGenerator() {
             type="number"
             placeholder="Primary No..."
             name="Primary"
-            step="0.01"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
@@ -107,7 +118,6 @@ function QRCodeGenerator() {
             type="number"
             placeholder="Emergency contact..."
             name="Secondary"
-            step="0.01"
             value={emergencyNumber}
             onChange={(e) => setEmergencyNumber(e.target.value)}
           />
@@ -134,25 +144,26 @@ function QRCodeGenerator() {
           <label className="label" htmlFor="address">
             Address:
           </label>
-          <input
+          <textarea
             type="text"
             placeholder="Enter Address"
             value={address}
+            rows={"6"}
+            style={{width:"100%",resize:'none',paddingLeft:'5px',border:'1px solid rgba(0,0,0,0.3)',borderRadius:'5px'}}
             onChange={(e) => setAddress(e.target.value)}
-          />
+          ></textarea>
         </div>
 
         <button className="button" type="button" style={{marginTop:'20px'}} onClick={handleGenerateQRCode}>
           Generate QR
         </button>
 
-        {/* <Qrcode
-          detailsString={generateQRCode()}
+        <Qrcode
+          detailsString={qrCodeData}
           showQRCode={showQRCode}
           animate={animate}
           handleGenerateQRCode={() => { setShowQRCode(false); setAnimate(false); }}
-
-        /> */}
+        />
       </div>
     </div>
   );
