@@ -1,39 +1,53 @@
-// frontend/src/components/QRCodeGenerator.js
-
 import React, { useState } from 'react';
-import axios from 'axios';
+import Navbar from '../Navbar';
+import Qrcode from './Qrcode';
 
-import Navbar from '../Navbar'
-
-function QRCodeGenerator() {
-  const [uniqueIdentifier, setUniqueIdentifier] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [personName, setPersonName] = useState('');
-  const [emergencyNumber, setEmergencyNumber] = useState('');
+const Details = () => {
+  const [name, setName] = useState('');
   const [gender, setGender] = useState('');
-  const [bloodGroup, setBloodGroup] = useState('');
+  const [primary, setPrimary] = useState('');
+  const [secondary, setSecondary] = useState('');
+  const [group, setGroup] = useState('');
+  const [address, setAddress] = useState('');
+  const [showQRCode, setShowQRCode] = useState(false);
+  const [animate, setAnimate] = useState(false);
 
-  const handleGenerateQRCode = async () => {
-    try {
-      const response = await axios.post('https://driver-qr.vercel.app/generate-qrcode', {
-        uniqueIdentifier: uniqueIdentifier,
-        userDetails: {
-          phoneNumber: phoneNumber,
-          personName: personName,
-          emergencyNumber: emergencyNumber,
-          gender: gender,
-          address: address,
-          bloodGroup: bloodGroup,
-        },
-      });
-      console.log(response)
-      alert('QR Code generated and user details saved successfully');
-    } catch (error) {
-      console.error(error);
-      alert('Error generating QR Code');
-    }
+  const handleGenerateQRCode = () => {
+    const details = {
+      name,
+      gender,
+      primary,
+      secondary,
+      group,
+      address,
+    };
+
+    localStorage.setItem('userData', JSON.stringify(details));
+
+    setShowQRCode(true);
+    setAnimate(true);
   };
+
+  const handleClosePopup = () => {
+    // Close the pop-up
+    setShowQRCode(false);
+    setAnimate(false);
+  };
+
+  const generateQRCode = () => {
+    const details = {
+      name,
+      gender,
+      primary,
+      secondary,
+      group,
+      address,
+    };
+
+    const detailsString = JSON.stringify(details);
+    return detailsString;
+  };
+
 
   return (
     <div>
@@ -44,19 +58,6 @@ function QRCodeGenerator() {
           <hr style={{ height: '2px', backgroundColor: 'black', border: 'none' }} />
         </div>
         <div style={{ marginTop: '5px' }}>
-          <label className="label" htmlFor="UniqueNumber">
-            UniqueNumber
-          </label>
-          <input
-            className="input-field"
-            type="text"
-            placeholder="UniqueKey..."
-            name="Key"
-            value={uniqueIdentifier}
-            onChange={(e) => setUniqueIdentifier(e.target.value)}
-          />
-        </div>
-        <div style={{ marginTop: '5px' }}>
           <label className="label" htmlFor="Name">
             Name
           </label>
@@ -65,8 +66,7 @@ function QRCodeGenerator() {
             type="text"
             placeholder="Name..."
             name="Name"
-            value={personName}
-            onChange={(e) => setPersonName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -75,7 +75,7 @@ function QRCodeGenerator() {
             Gender
           </label>
           <select className="select-field" name="gender" onChange={(e) => setGender(e.target.value)}>
-            <option value="" disabled>--Select gender--</option>
+            <option value="">--Select gender--</option>
             <option value="M" >Male</option>
             <option value="F">Female</option>
           </select>
@@ -91,8 +91,7 @@ function QRCodeGenerator() {
             placeholder="Primary No..."
             name="Primary"
             step="0.01"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={(e) => setPrimary(e.target.value)}
           />
         </div>
 
@@ -106,8 +105,7 @@ function QRCodeGenerator() {
             placeholder="Emergency contact..."
             name="Secondary"
             step="0.01"
-            value={emergencyNumber}
-            onChange={(e) => setEmergencyNumber(e.target.value)}
+            onChange={(e) => setSecondary(e.target.value)}
           />
         </div>
 
@@ -115,8 +113,8 @@ function QRCodeGenerator() {
           <label className="label" htmlFor="group">
             Blood Group
           </label>
-          <select className="select-field" name="group" onChange={(e) => setBloodGroup(e.target.value)}>
-            <option value="" disabled>--Select Bloog group--</option>
+          <select className="select-field" name="group" onChange={(e) => setGroup(e.target.value)}>
+            <option value="">--Select Bloog group--</option>
             <option value="O+">O+</option>
             <option value="O-">O-</option>
             <option value="A+">A+</option>
@@ -132,28 +130,23 @@ function QRCodeGenerator() {
           <label className="label" htmlFor="address">
             Address:
           </label>
-          <input
-            type="text"
-            placeholder="Enter Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+          <textarea className="textarea-field" onChange={(e) => setAddress(e.target.value)} />
         </div>
 
         <button className="button" type="button" onClick={handleGenerateQRCode}>
           Generate QR
         </button>
 
-        {/* <Qrcode
+        <Qrcode
           detailsString={generateQRCode()}
           showQRCode={showQRCode}
           animate={animate}
           handleGenerateQRCode={() => { setShowQRCode(false); setAnimate(false); }}
 
-        /> */}
+        />
       </div>
     </div>
   );
-}
+};
 
-export default QRCodeGenerator;
+export default Details;

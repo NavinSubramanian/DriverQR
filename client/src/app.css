@@ -2,3 +2,346 @@
     max-width: 20%;
     height: 200px;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .right-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-right: 1rem;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .login-button {
+    background-color: #fff;
+    color: black;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "montserrat";
+    font-weight: 500;
+  }
+  .loginContainer,
+  .signupContainer {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 80px;
+    border: none;
+    position: relative;
+  }
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .username,
+  .password,
+  .name,
+  .lastname,
+  .num {
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+  }
+  .btn {
+    background-color: #ff782d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+    height: 50px;
+    font-size: 18px;
+  }
+  
+  .loginContainer,
+  .signupContainer {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top: 80px;
+    border: none;
+    position: relative;
+  }
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    background-color: black;
+    border-radius: 50%;
+    height: 25px;
+    color: white;
+    width: 25px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .username,
+  .password,
+  .name,
+  .lastname,
+  .num {
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+  }
+  .loginButton {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+    height: 50px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+  }
+  
+  /* details section */
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+  
+  .header {
+    margin-bottom: 40px;
+  }
+  
+  .label {
+    font-family: "montserrat";
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "montserrat";
+  }
+  
+  .select-field {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-family: "montserrat";
+  }
+  
+  .textarea-field {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .button {
+    background-color: black;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "montserrat";
+    height: 45px;
+    width: 150px;
+    font-size: 18px;
+  }
+  
+  /* qr code section */
+  .qr-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .white-popup {
+    position: fixed;
+    top: 30%;
+    left: 38%;
+    background: #fff;
+    padding: 25px;
+    width: 50vh;
+    height: 50vh;
+    margin: 0 auto;
+  
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border: 1px solid black;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .mfp-zoom-in {
+    /* start state */
+    .mfp-with-anim {
+      opacity: 0;
+      transition: all 0.2s ease-in-out;
+      transform: scale(0.8);
+    }
+  
+    &.mfp-bg {
+      opacity: 0;
+      transition: all 0.3s ease-out;
+    }
+  
+    &.mfp-ready {
+      .mfp-with-anim {
+        opacity: 1;
+        transform: scale(1);
+      }
+      &.mfp-bg {
+        opacity: 0.8;
+      }
+    }
+  
+    &.mfp-removing {
+      .mfp-with-anim {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      &.mfp-bg {
+        opacity: 0;
+      }
+    }
+  }
+  .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    background-color: black;
+    border-radius: 50%;
+    height: 25px;
+    color: white;
+    width: 25px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .qr-header {
+    text-align: center;
+    font-family: "montserrat";
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .button1 {
+    background-color: black;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "montserrat";
+    height: 45px;
+    width: 150px;
+    font-size: 18px;
+    margin-top: 25px;
+  }
+  
+  /* dashboard */
+  .dash-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .dashboard-table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    align-items: center;
+  }
+  
+  .dashboard-table th,
+  .dashboard-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-family: "montserrat";
+  }
+  
+  .dashboard-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .dashboard-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .dashboard-table tbody tr:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .dashboard-table td {
+    max-width: 200px; /* Set a max-width for the content */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  

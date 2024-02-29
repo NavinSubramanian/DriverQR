@@ -56,8 +56,11 @@ function QRCodeScanner() {
       {userDetails && (
         <div>
           <h2>User Details</h2>
+          <p><strong>Name:</strong> {userDetails.personName}</p>
+          <p><strong>Gender:</strong> {userDetails.gender}</p>
           <p><strong>Blood Group:</strong> {userDetails.bloodGroup}</p>
           <p><strong>Phone Number:</strong> {userDetails.phoneNumber}</p>
+          <p><strong>Emergency Number:</strong> {userDetails.emergencyNumber}</p>
           <p><strong>Address:</strong> {userDetails.address}</p>
           {/* Display other user details as needed */}
         </div>
@@ -75,10 +78,12 @@ function QRCodeScanner() {
 // InfoPrompt component
 function InfoPrompt({ onSubmit }) {
   const [infoData, setInfoData] = useState({
+    personName: '',
+    gender: '',
     bloodGroup: '',
     phoneNumber: '',
+    emergencyNumber: '',
     address: '',
-    // Add other fields as needed
   });
 
   const handleInputChange = (e) => {
@@ -98,10 +103,12 @@ function InfoPrompt({ onSubmit }) {
     <div>
       <h2>Enter Your Information</h2>
       <form onSubmit={handleSubmit}>
+        <input type="text" name="personName" placeholder="Your Name" value={infoData.personName} onChange={handleInputChange} />
+        <input type="text" name="gender" placeholder="Gender" value={infoData.gender} onChange={handleInputChange} />
         <input type="text" name="bloodGroup" placeholder="Blood Group" value={infoData.bloodGroup} onChange={handleInputChange} />
         <input type="text" name="phoneNumber" placeholder="Phone Number" value={infoData.phoneNumber} onChange={handleInputChange} />
+        <input type="text" name="emergencyNumber" placeholder="Phone Number" value={infoData.emergencyNumber} onChange={handleInputChange} />
         <input type="text" name="address" placeholder="Address" value={infoData.address} onChange={handleInputChange} />
-        {/* Add other input fields for additional user details */}
         <button type="submit">Submit</button>
       </form>
     </div>
