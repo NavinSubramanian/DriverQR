@@ -1,8 +1,16 @@
 import React from 'react';
 import './app.css'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        localStorage.removeItem('isLoggedIn');
+        navigate('/login');
+    }
+
     return (
         <nav className="navbar">
             <div className="left-section">
@@ -11,14 +19,12 @@ const Navbar = () => {
 
             <div className="right-section">
                 <ul className="nav-links">
-                    <li>
-                        Home
-                    </li>
+
                     <li>
                         <Link to='/dashboard' style={{textDecoration:'none',color:'white'}}>Dashboard</Link>
                     </li>
                 </ul>
-                <button className="login-button"><Link style={{color:'black',textDecoration:'none'}} to='/login'>Login</Link></button>
+                <button className="login-button" onClick={handleLogout}>Logout</button>
             </div>
         </nav>
     );

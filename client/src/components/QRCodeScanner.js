@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Navbar from '../Navbar';
 
 
 
@@ -15,7 +16,7 @@ function QRCodeScanner() {
       const response = await axios.get(`https://driver-qr.vercel.app/user-details/${uniqueNumber}`);
       const user = response.data.user.userDetails;
       var existsInDB = true;
-      if(user.bloodGroup === ""){
+      if(user.address === ""){
         existsInDB=false;
       }
       if (existsInDB) {
@@ -51,7 +52,12 @@ function QRCodeScanner() {
   };
 
   return (
-    <div>
+    <>
+      <nav className="navbar">
+          <div className="left-section">
+              <span className="logo">Scanhubgen</span>
+          </div>
+      </nav>
       {error && <p>{error}</p>}
       {userDetails && (
         <div>
@@ -66,7 +72,7 @@ function QRCodeScanner() {
         </div>
       )}
       {showInfoPrompt && <InfoPrompt onSubmit={handleInfoSubmit} />}
-    </div>
+    </>
   );
 }
 

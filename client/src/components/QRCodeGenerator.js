@@ -33,6 +33,7 @@ function QRCodeGenerator() {
           bloodGroup: bloodGroup,
         },
       });
+      console.log(response)
       setQrCodeData(response.data.qrCodeData);
       setShowQRCode(true);
       setAnimate(true);
@@ -49,12 +50,24 @@ function QRCodeGenerator() {
     setAnimate(false);
   };
 
+  const generateRandomString = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let randomString = '';
+    for (let i = 0; i < 10; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomString += characters[randomIndex];
+    }
+    setUniqueIdentifier(randomString);
+  };
+
+  console.log(showQRCode)
+
   return (
     <div>
       <Navbar />
       <div className='container'>
         <div className='header'>
-          <h1 style={{ textAlign: 'center'}}>QR Generator - Provide Details</h1>
+          <h1 style={{ textAlign: 'center', fontFamily:'Arial'}}>QR Generator - Provide Details</h1>
           <hr style={{ height: '2px', backgroundColor: 'black', border: 'none' }} />
         </div>
         <div style={{ marginTop: '5px' }}>
@@ -69,6 +82,7 @@ function QRCodeGenerator() {
             value={uniqueIdentifier}
             onChange={(e) => setUniqueIdentifier(e.target.value)}
           />
+          <button onClick={generateRandomString}>Random Generator</button>
         </div>
         <div style={{ marginTop: '5px' }}>
           <label className="label" htmlFor="Name">
@@ -162,7 +176,7 @@ function QRCodeGenerator() {
           detailsString={qrCodeData}
           showQRCode={showQRCode}
           animate={animate}
-          handleGenerateQRCode={() => { setShowQRCode(false); setAnimate(false); }}
+          handleClosePopup={() => { setShowQRCode(false); setAnimate(false); }}
         />
       </div>
     </div>

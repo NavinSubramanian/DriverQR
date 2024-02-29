@@ -1,6 +1,6 @@
 // frontend/src/App.js
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import QRCodeGenerator from './components/QRCodeGenerator';
 import QRCodeScanner from './components/QRCodeScanner';
@@ -9,21 +9,24 @@ import Login from './components/Login'
 import Navbar from './Navbar'
 import Qrcode from './components/Qrcode'
 import Dashboard from './components/Dashboard'
+import PrivateRoutes from './utils/PrivateRoutes';
 
-import { Route,BrowserRouter,Routes } from 'react-router-dom'
+import { Route,BrowserRouter,Routes,PrivateRoute, Navigate } from 'react-router-dom'
 
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
       <BrowserRouter>
         <Routes>
-          <Route path='/' Component={QRCodeGenerator}></Route>
-          <Route path='/user-details/:uniqueNumber' Component={QRCodeScanner}></Route>
+          <Route element={<PrivateRoutes />}>
+            <Route path='/' element={<QRCodeGenerator />} exact></Route>
+            <Route path="/dashboard" element={<Dashboard />} exact></Route>
+          </Route>
           <Route path="login" element={<Login />} />
-          <Route path="navbar" element={<Navbar />} />
-          <Route path="details" element={<Details />} />
-          <Route path="qrcode" element={<Qrcode />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path='/user-details/:uniqueNumber' element={<QRCodeScanner />}></Route>
         </Routes>
       </BrowserRouter>
   );
