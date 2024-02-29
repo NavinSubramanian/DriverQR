@@ -52,7 +52,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "montserrat";
     font-weight: 500;
   }
   .loginContainer,
@@ -158,7 +157,6 @@
   }
   
   .label {
-    font-family: "montserrat";
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
@@ -170,14 +168,12 @@
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-family: "montserrat";
   }
   
   .select-field {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
-    font-family: "montserrat";
   }
   
   .textarea-field {
@@ -195,8 +191,8 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-family: "montserrat";
     height: 45px;
+    margin-top: 20px;
     width: 150px;
     font-size: 18px;
   }
@@ -284,7 +280,6 @@
   
   .qr-header {
     text-align: center;
-    font-family: "montserrat";
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -296,7 +291,6 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-family: "montserrat";
     height: 45px;
     width: 150px;
     font-size: 18px;
@@ -323,7 +317,6 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    font-family: "montserrat";
   }
   
   .dashboard-table th {

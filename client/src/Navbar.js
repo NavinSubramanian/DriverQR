@@ -6,16 +6,16 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="left-section">
-                <span className="logo" style={{fontFamily:'montserrat'}}>Scanhubgen</span>
+                <span className="logo">Scanhubgen</span>
             </div>
 
             <div className="right-section">
                 <ul className="nav-links">
-                    <li style={{fontFamily:'montserrat'}}>
+                    <li>
                         Home
                     </li>
-                    <li style={{fontFamily:'montserrat'}}>
-                        Dashboard
+                    <li>
+                        <Link to='/dashboard' style={{textDecoration:'none',color:'white'}}>Dashboard</Link>
                     </li>
                 </ul>
                 <button className="login-button"><Link style={{color:'black',textDecoration:'none'}} to='/login'>Login</Link></button>

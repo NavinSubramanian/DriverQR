@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import '../app.css'
 import Navbar from '../Navbar'
+import Login from './Login'
 
 function QRCodeGenerator() {
   const [uniqueIdentifier, setUniqueIdentifier] = useState('');
@@ -40,7 +42,7 @@ function QRCodeGenerator() {
       <Navbar />
       <div className='container'>
         <div className='header'>
-          <h1 style={{ textAlign: 'center', fontFamily: 'montserrat' }}>QR Generator - Provide Details</h1>
+          <h1 style={{ textAlign: 'center'}}>QR Generator - Provide Details</h1>
           <hr style={{ height: '2px', backgroundColor: 'black', border: 'none' }} />
         </div>
         <div style={{ marginTop: '5px' }}>
@@ -140,7 +142,7 @@ function QRCodeGenerator() {
           />
         </div>
 
-        <button className="button" type="button" onClick={handleGenerateQRCode}>
+        <button className="button" type="button" style={{marginTop:'20px'}} onClick={handleGenerateQRCode}>
           Generate QR
         </button>
 

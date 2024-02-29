@@ -7,17 +7,17 @@ export default function Login() {
             <form style={{ display: 'flex', flexDirection: 'column' }}>
                 <button className="close-button"><Link to='/' style={{ color: 'white', textDecoration: 'none' }}>X</Link></button>
 
-                <h1 style={{ margin: '10px 0', fontFamily: 'montserrat' }}>Lets Sign you in</h1>
+                <h1 style={{ margin: '10px 0', }}>Lets Sign you in</h1>
 
-                <p style={{ margin: '10px 0', fontFamily: 'montserrat' }}>Welcome Back ,<br />You have been missed</p>
+                <p style={{ margin: '10px 0', }}>Welcome Back ,<br />You have been missed</p>
 
-                <input typeof='text' placeholder='Email , Register number' className='username' style={{ fontFamily: 'montserrat' }}></input>
+                <input typeof='text' placeholder='Email , Register number' className='username' style={{ }}></input>
 
-                <input typeof='text' placeholder='Password' className='password' style={{ fontFamily: 'montserrat' }}></input>
+                <input typeof='text' placeholder='Password' className='password' style={{ }}></input>
 
-                <a href="/" style={{ textDecoration: 'none', fontFamily: 'montserrat' }}>Forgot Password?</a>
+                <a href="/" style={{ textDecoration: 'none', }}>Forgot Password?</a>
 
-                <button className='loginButton' style={{ fontFamily: 'montserrat' }}>Sign in</button>
+                <button className='loginButton' style={{ }}>Sign in</button>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <hr style={{ flex: 1, marginRight: '10px' }} />
@@ -34,9 +34,7 @@ export default function Login() {
                     </a>
 
                 </div>
-                <a href='/' style={{ textDecoration: 'none', color: 'black', marginTop: 10, fontFamily: 'montserrat' }}>
-                    Don't have an account ? <b><Link style={{ color: 'black', fontFamily: 'montserrat' }} to='/signup'>Register Now</Link></b>
-                </a>
+
             </form >
         </div >
     )

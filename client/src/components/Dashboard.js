@@ -1,47 +1,52 @@
-import React, { useEffect, useState } from 'react';
+// Dashboard.js
 
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Dashboard = () => {
-  const [userData, setUserData] = useState(null);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // Fetch data from local storage on component mount
-    const storedData = localStorage.getItem('userData');
-    if (storedData) {
-      setUserData(JSON.parse(storedData));
-    }
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('https://driver-qr.vercel.app/users');
+        console.log(response)
+        setUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
   }, []);
 
   return (
     <div className='dash-container'>
       <h2>User Dashboard</h2>
-      {userData ? (
-        <table className="dashboard-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Contact no</th>
-              <th>Emergency contact</th>
-              <th>Blood group</th>
-              <th>Address</th>
+      <table className="dashboard-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Contact no</th>
+            <th>Emergency contact</th>
+            <th>Blood group</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user._id}>
+              <td>{user.userDetails.personName}</td>
+              <td>{user.userDetails.gender}</td>
+              <td>{user.userDetails.phoneNumber}</td>
+              <td>{user.userDetails.emergencyNumber}</td>
+              <td>{user.userDetails.bloodGroup}</td>
+              <td>{user.userDetails.address}</td>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{userData.name}</td>
-              <td>{userData.gender}</td>
-              <td>{userData.primary}</td>
-              <td>{userData.secondary}</td>
-              <td>{userData.group}</td>
-              <td>{userData.address}</td>
-
-            </tr>
-          </tbody>
-        </table>
-      ) : (
-        <p>No data available</p>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
