@@ -44,6 +44,8 @@ function QRCodeScanner() {
         userDetails: infoData
       });
       console.log('User details saved successfully:');
+      setShowInfoPrompt(true)
+      await fetchUserDetails()
       // Handle success message or redirect to another page
     } catch (error) {
       console.error('Error saving user details:', error.message);
@@ -58,9 +60,24 @@ function QRCodeScanner() {
               <span className="logo">Scanhubgen</span>
           </div>
       </nav>
+      <div>
+        <p className='head' style={{ fontFamily: 'Poppins', fontSize: '25px', marginTop: '30px', width:'100%',textAlign:'center' }}>Welcome to Scanhubgen!</p>
+      </div>
+
+      <div id="details-container" style={{width:'100%',textAlign:'center',
+          padding: '20px', '@media (max-width: 600px)': { padding: '10px' },
+          '@media (min-width: 601px) and (max-width: 768px)': { padding: '15px' }, '@media (min-width: 769px) and (max-width: 1024px)': { padding: '20px' }
+      }}>
+          <p className='head1' style={{ fontFamily: 'Poppins', marginTop: '20px', marginBottom: '25px', fontSize: '25px', }}>
+              Thanks for scanning the QR code, and now you instantly access vital details of the recipient. </p>
+      </div>
+
       {error && <p>{error}</p>}
       {userDetails && (
         <div>
+          <div>
+              <p style={{ fontFamily: 'Poppins', marginBottom: '20px', fontWeight: '600', fontSize: '20px', width:'100%',textAlign:'center'}}>Here is the scanned information of the recipient,</p>
+          </div>
           <h2>User Details</h2>
           <p><strong>Name:</strong> {userDetails.personName}</p>
           <p><strong>Gender:</strong> {userDetails.gender}</p>
@@ -107,6 +124,9 @@ function InfoPrompt({ onSubmit }) {
 
   return (
     <div>
+      <div>
+          <p style={{ fontFamily: 'Poppins', marginBottom: '20px', fontWeight: '600', fontSize: '20px', width:'100%',textAlign:'center'}}>It looks like you have not filled the information, Please enter your info to save the data,</p>
+      </div>
       <h2>Enter Your Information</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="personName" placeholder="Your Name" value={infoData.personName} onChange={handleInputChange} />
