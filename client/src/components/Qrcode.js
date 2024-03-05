@@ -21,7 +21,7 @@ const Qrcode = ({ detailsString, showQRCode, animate, handleGenerateQRCode }) =>
           <QRCode value={detailsString} size={200} />
           <div>
             <button className='button1'>Save as PNG</button>
-            <span className="close-btn"><Link to='/details'>X</Link></span>
+            <span className="close-btn"><Link to='/generate'>X</Link></span>
           </div>
         </animated.div>
       </>

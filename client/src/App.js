@@ -10,7 +10,7 @@ import PrivateRoutes from './utils/PrivateRoutes';
 import MassQRCodeGenerator from './components/MassQRCodeGenerator';
 
 import { Route,BrowserRouter,Routes,PrivateRoute, Navigate } from 'react-router-dom'
-
+import Landingpage from './components/Landingpage';
 
 function App() {
 
@@ -20,7 +20,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route path='/' element={<QRCodeGenerator />} exact></Route>
+            <Route path='/' element={<Landingpage />} exact></Route>
+            <Route path='/generate' element={<QRCodeGenerator />} exact></Route>
             <Route path='/massgen' element={<MassQRCodeGenerator />} exact></Route>
             <Route path="/dashboard" element={<Dashboard />} exact></Route>
           </Route>
