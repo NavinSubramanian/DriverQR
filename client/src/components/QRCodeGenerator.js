@@ -7,6 +7,7 @@ import '../app.css'
 import Navbar from '../Navbar'
 import Login from './Login'
 import Qrcode from './Qrcode';
+import { Link } from 'react-router-dom';
 
 function QRCodeGenerator() {
   const [uniqueIdentifier, setUniqueIdentifier] = useState('');
@@ -66,6 +67,10 @@ function QRCodeGenerator() {
     <div>
       <Navbar />
       <div className='container'>
+        <div className=''>
+          <h3>Mass Gen?</h3>
+          <Link to='/massgen'>Click here</Link>
+        </div>
         <div className='header'>
           <h1 style={{ textAlign: 'center', fontFamily:'Arial'}}>QR Generator - Provide Details</h1>
           <hr style={{ height: '2px', backgroundColor: 'black', border: 'none' }} />

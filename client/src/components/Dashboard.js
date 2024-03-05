@@ -26,23 +26,29 @@ const Dashboard = () => {
       <table className="dashboard-table">
         <thead>
           <tr>
+            <th>Id</th>
             <th>Name</th>
             <th>Gender</th>
             <th>Contact no</th>
             <th>Emergency contact</th>
             <th>Blood group</th>
             <th>Address</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
+              <td>{user._id}</td>
               <td>{user.userDetails.personName}</td>
               <td>{user.userDetails.gender}</td>
               <td>{user.userDetails.phoneNumber}</td>
               <td>{user.userDetails.emergencyNumber}</td>
               <td>{user.userDetails.bloodGroup}</td>
               <td>{user.userDetails.address}</td>
+              <td>
+                <button>?</button>
+              </td>
             </tr>
           ))}
         </tbody>
