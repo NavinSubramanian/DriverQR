@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import logo from '../logo.png'
+import Flanzer from '../flanzer.png'
+import '../app.css'
+
 import Navbar from '../Navbar';
 
 const MassQRCodeGenerator = () => {
@@ -45,11 +48,99 @@ const MassQRCodeGenerator = () => {
   };
 
   const printQRCodeContainer = () => {
+    
     const printableContent = document.getElementById('codecontainer').innerHTML;
-    const originalContent = document.body.innerHTML;
-    document.body.innerHTML = printableContent;
-    window.print();
-    document.body.innerHTML = originalContent;
+    const printWindow = window.open('', '_blank');
+    
+    if (printWindow) {
+      printWindow.document.open();
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>QR Codes</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+            <style>
+              *{
+                margin:0;
+                padding:0;
+                font-family:'Poppins'
+              }
+              .qr-code-container {
+                display: flex;
+                flex-wrap: wrap;  
+                margin-top: 30px;
+              }
+              
+              .qr-code-row {
+                display: flex;
+                justify-content: center;
+              }
+              
+              .qr-code {
+                width: 173px;
+                height: 71px;
+                align-items: flex-end;
+              }
+              .qr-code-content {
+                display: flex;
+                align-items: center;
+              }
+              
+              .qr-code img {
+                margin-left: 1px;
+              }
+              
+              
+              .tilted-wrapper {
+                display: flex;
+                align-items: center;
+              }
+              
+              .tilted-text {
+                writing-mode: vertical-lr;
+                text-orientation: upright;
+                font-size: 4px;
+                margin-right: 2px;
+                letter-spacing: -2px;
+              }
+              .float,.floatdiv{
+                position: absolute;
+              }
+              .float,.floatdiv>h6{
+                font-size: 4px;
+              }
+              .float{
+                top: 1.4px;
+                left: 14px;
+              }
+              .floatdiv{
+                bottom: 2px;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                right: -4px;
+                justify-content: space-around;
+              }
+              
+            </style>
+          </head>
+          <body>${printableContent}</body>
+        </html>
+      `);
+      printWindow.document.close();
+
+      printWindow.print();
+    } else {
+      alert('Please allow pop-ups for this site to enable printing.');
+    }
+
+    // const printableContent = document.getElementById('codecontainer').innerHTML;
+    // const originalContent = document.body.innerHTML;
+    // document.body.innerHTML = printableContent;
+    // window.print();
+    // document.body.innerHTML = originalContent;
   };
 
   return (
@@ -71,13 +162,23 @@ const MassQRCodeGenerator = () => {
       <div id='codecontainer'>
         <div className="qr-code-container">
           {generatedCodes.map((code) => (
-            <div key={code.generatedCodes} className="qr-code">
+            <div key={code.generatedCodes} className="qr-code" style={{height:'75.59px',width:'185.197px'}}>
               <div className="qr-code-content">
-                <div className="tilted-wrapper">
-                  <p className="tilted-text">{code.uniqueIdentifier}</p>
+                <div style={{display:'flex',position:'relative',height:'75.59px',width:'92.598px',alignItems:'center',justifyContent:'center'}}>
+                    <h6 className='float' style={{fontSize:'5px',width:'100%',}}>SCAN FOR EMERGENCY/LOST</h6>
+                    <div className='floatdiv'>
+                        <h6 style={{fontWeight:'300',display:'flex',justifyContent:'space-between',fontSize:'3px',alignItems:'center',textAlign:'center'}}>powered by <span style={{marginLeft:'2px',fontWeight:'500',fontSize:'4px'}}>
+                            <img src={Flanzer} style={{height:'5px',width:'4.5px',position:'relative',top:'1.2px',right:'1px'}}></img>
+                            theflanzer.com
+                            </span>
+                        </h6>
+                    </div>
+                    <div className="tilted-wrapper">
+                        <p className="tilted-text">{code.uniqueIdentifier}</p>
+                    </div>
+                    <img src={code.qrCodeData} style={{height:'55px',width:'55px'}} alt={`QR Code for ${code.uniqueIdentifier}`} />
                 </div>
-                <img src={code.qrCodeData} style={{height:'70px',width:'70px'}} alt={`QR Code for ${code.uniqueIdentifier}`} />
-                <img style={{ height: '70.590551181px', width: '100.28346457px' }} src={logo} alt='Logo' />
+                <img style={{ height: '75.59px', width: '92.598px' }} src={logo} alt='Logo' />
               </div>
             </div>
           ))}

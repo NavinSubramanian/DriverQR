@@ -382,12 +382,11 @@
   .qr-code-row {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
   }
   
   .qr-code {
-    width: 197px;
-    height: 76px;
+    width: 173px;
+    height: 71px;
     align-items: flex-end;
   }
   .qr-code-content {
@@ -408,14 +407,33 @@
   .tilted-text {
     writing-mode: vertical-lr;
     text-orientation: upright;
-    font-size: 8px;
+    font-size: 4px;
+    margin-right: 2px;
     letter-spacing: -2px;
-    margin-right: 5px;
+  }
+  .float,.floatdiv{
+    position: absolute;
+  }
+  .float,.floatdiv>h6{
+    font-size: 4px;
+  }
+  .float{
+    top: 1.4px;
+    left: 14px;
+  }
+  .floatdiv{
+    bottom: 2px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    right: -4px;
+    justify-content: space-around;
   }
   
   
 
   /* lannding page */
+
 .flex-item {
   position: relative;
   display: inline-block;
