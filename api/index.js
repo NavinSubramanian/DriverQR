@@ -131,12 +131,22 @@ app.put('/users/:id', async (req, res) => {
     const { id } = req.params;
     const updatedFields = req.body;
     console.log(id)
-    console.log(updatedFields)
-
 
     // Find the user by ID and update the fields
-    const user = await User.findByIdAndUpdate(id, updatedFields, { new: true });
+    const user = await User.findById(id)
     console.log(user)
+    let dEntries = Object.entries(user.userDetails);
+    let d2Entries = Object.entries(updatedFields);
+
+    for (let i = 0; i < dEntries.length; i++) {
+        let [k, v] = dEntries[i];
+        let [k2, v2] = d2Entries[i];
+        
+        if (v !== v2){
+          const up = await User.findByIdAndUpdate(id,{$set:{k:v2}},{new:true})
+          console.log(up)
+        }
+    }
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
