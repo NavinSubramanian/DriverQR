@@ -152,8 +152,17 @@ app.put('/users/:id', async (req, res) => {
       if(dEntries[key] !== d2Entries[key]){
         console.log("YES!")
         const userData = {[key]:d2Entries[key]} 
-        const up = User.findOneAndUpdate({_id:id},userData,{new:true})
-        console.log(up)
+        const up = User.findOneAndUpdate(
+          {_id:id},
+          {
+            $set:{[key]:d2Entries[key]}
+          },
+          {new:true}
+          , function( error, result){
+            console.log("Error"+error)
+            console.log("Succes"+result)
+          }
+          )
       }
     })
 
@@ -161,7 +170,7 @@ app.put('/users/:id', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.json({ message: 'User updated successfully', user });
+    res.json({ message: 'User updated successfully', up });
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ message: 'Internal server error' });
