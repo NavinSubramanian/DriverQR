@@ -137,7 +137,6 @@ app.put('/users/:id', async (req, res) => {
     let dEntries = user.userDetails
     let d2Entries = updatedFields.newRow
 
-    console.log(d2Entries)
 
     const user_b = [
       "personName",
@@ -150,8 +149,10 @@ app.put('/users/:id', async (req, res) => {
 
     user_b.map((key)=>{
       console.log(dEntries[key]+" "+d2Entries[key])
-      if(dEntries[key] != d2Entries[key]){
+      if(dEntries[key] !== d2Entries[key]){
+        console.log("YES!")
         const up = User.findByIdAndUpdate(id,{$set:{key:d2Entries[key]}},{new:true})
+        console.log(up)
       }
     })
 
