@@ -15,6 +15,7 @@ import {
   GridToolbarContainer,
   GridActionsCellItem,
   GridRowEditStopReasons,
+  GridToolbar,
 } from '@mui/x-data-grid';
 import {
   randomCreatedDate,
@@ -23,32 +24,14 @@ import {
   randomArrayItem,
 } from '@mui/x-data-grid-generator';
 
+import { Container } from '@mui/material';
+
+
 const roles = ['Market', 'Finance', 'Development'];
 const randomRole = () => {
   return randomArrayItem(roles);
 };
 
-
-function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
-
-  const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
-    }));
-  };
-
-  return (
-    <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
-      </Button>
-    </GridToolbarContainer>
-  );
-}
 
 export default function FullFeaturedCrudGrid() {
   const [rows, setRows] = React.useState([]);
@@ -154,18 +137,21 @@ export default function FullFeaturedCrudGrid() {
     field: 'emergencyNumber',
     headerName: 'Emergency Number',
     sortable: false,
+    editable: true,
     width: 160,
   },
   {
     field: 'bloodGroup',
     headerName: 'Blood Group',
     sortable: false,
+    editable: true,
     width: 120,
   },
   {
     field: 'address',
     headerName: 'Address',
     sortable: false,
+    editable: true,
     width: 300,
   },
     {
@@ -217,33 +203,39 @@ export default function FullFeaturedCrudGrid() {
   ];
 
   return (
-    <Box
-      sx={{
-        height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
-        },
-        '& .textPrimary': {
-          color: 'text.primary',
-        },
-      }}
-    >
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
+    <Container>
+      <Box
+        sx={{
+          height: 500,
+          width: '100%',
+          '& .actions': {
+            color: 'text.secondary',
+          },
+          '& .textPrimary': {
+            color: 'text.primary',
+          },
         }}
-        slotProps={{
-          toolbar: { setRows, setRowModesModel },
-        }}
-      />
-    </Box>
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          editMode="row"
+          rowModesModel={rowModesModel}
+          onRowModesModelChange={handleRowModesModelChange}
+          onRowEditStop={handleRowEditStop}
+          processRowUpdate={processRowUpdate}
+          slots={{
+            toolbar: GridToolbar,
+          }}
+          slotProps={{
+            toolbar: { 
+              setRows, 
+              setRowModesModel,
+              showQuickFilter: true,
+            },
+          }}
+        />
+      </Box>
+    </Container>
   );
 }

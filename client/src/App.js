@@ -2,16 +2,15 @@
 
 import React, { useState } from 'react';
 
-import QRCodeGenerator from './components/QRCodeGenerator';
-import QRCodeScanner from './components/QRCodeScanner';
+import QRCodeGenerator from './QRCodeGenerator';
+import QRCodeScanner from './QRCodeScanner';
 import Login from './components/Login'
-import Dashboard from './components/Dashboard'
+import Dashboard from './Dashboard'
 import PrivateRoutes from './utils/PrivateRoutes';
-import MassQRCodeGenerator from './components/MassQRCodeGenerator';
+import MassQRCodeGenerator from './MassQRCodeGenerator';
+import Landingpage from './Landingpage';
 
 import { Route,BrowserRouter,Routes,PrivateRoute, Navigate } from 'react-router-dom'
-import Landingpage from './components/Landingpage';
-import Generateqr from './components/Generator';
 
 function App() {
 
@@ -27,7 +26,6 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} exact></Route>
           </Route>
           <Route path="login" element={<Login />} />
-          <Route path="/gen" element={<Generateqr />}></Route>
           <Route path='/user-details/:uniqueNumber' element={<QRCodeScanner />}></Route>
         </Routes>
       </BrowserRouter>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import logo from '../logo.png'
-import Flanzer from '../flanzer.png'
-import '../app.css'
+import logo from './images/logo.png'
+import Flanzer from './images/flanzer.png'
+import './app.css'
 
-import Navbar from '../Navbar';
+import Navbar from './components/Navbar';
 
 const MassQRCodeGenerator = () => {
 
@@ -135,12 +135,6 @@ const MassQRCodeGenerator = () => {
     } else {
       alert('Please allow pop-ups for this site to enable printing.');
     }
-
-    // const printableContent = document.getElementById('codecontainer').innerHTML;
-    // const originalContent = document.body.innerHTML;
-    // document.body.innerHTML = printableContent;
-    // window.print();
-    // document.body.innerHTML = originalContent;
   };
 
   return (

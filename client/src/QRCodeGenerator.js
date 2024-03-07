@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import '../app.css'
-import Navbar from '../Navbar'
-import Login from './Login'
-import Qrcode from './Qrcode';
+import './app.css'
+
+import Navbar from './components/Navbar'
+import Qrcode from './components/Qrcode';
+
 import { Link } from 'react-router-dom';
 
 function QRCodeGenerator() {

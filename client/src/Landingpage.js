@@ -1,5 +1,8 @@
 import React from 'react'
-import Navbar from '../Navbar'
+
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+
 import { Link } from 'react-router-dom'
 
 
@@ -8,12 +11,10 @@ const Landingpage = () => {
     return (
         <div>
             <Navbar />
-
             <div>
                 <p className='head' style={{ fontSize: '25px', marginTop: '30px', marginLeft: '100px' }}>
                     Welcome to Scanhubgen!,</p>
             </div>
-
             <div>
                 <p style={{ marginTop: '20px', fontWeight: '400', fontSize: '20px', marginLeft: '150px', lineHeight: '30px', maxWidth: '1300px' }}>
                     Scanhubgen, seamlessly <b>generate and affix QR code</b> embedding your crucial contact particulars at your discretion.
@@ -53,11 +54,9 @@ const Landingpage = () => {
                     <p class="item-stat">Swiftly access all the user details, upto date and edit the details when needed for the changes.</p>
                     <button className='button2'> <Link to='/dashboard' style={{ color: 'white', textDecoration: 'none' }}>Enter</Link> </button>
                 </div>
-
             </div>
 
-
-
+            <Footer />
         </div>
     )
 }

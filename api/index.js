@@ -132,34 +132,8 @@ app.put('/users/:id', async (req, res) => {
     const updatedFields = req.body;
     console.log(id)
 
-    // Find the user by ID and update the fields
-    // const user = await User.findById(id)
-    // let dEntries = user.userDetails
     const upd = await User.findByIdAndUpdate(id, updatedFields, { new: true });
     console.log(upd);
-
-    // const user_b = [
-    //   "personName",
-    //   "emergencyNumber",
-    //   "gender",
-    //   "phoneNumber",
-    //   "address",
-    //   "bloodGroup",
-    // ]
-
-    // await Promise.all(user_b.map(async (key) => {
-    //   console.log(dEntries[key] + " " + d2Entries[key]);
-    //   if (dEntries[key] !== d2Entries[key]) {
-    //     console.log("YES!");
-    //     const userData = { [key]: d2Entries[key] };
-    //     const up = await User.findOneAndUpdate(
-    //       { _id: id },
-    //       userData,
-    //       { new: true }
-    //     );
-    //     console.log(up);
-    //   }
-    // }));
 
     if (!upd) {
       return res.status(404).json({ message: 'User not found' });
