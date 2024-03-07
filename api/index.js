@@ -134,9 +134,9 @@ app.put('/users/:id', async (req, res) => {
 
     // Find the user by ID and update the fields
     const user = await User.findById(id)
-    console.log(user)
-    let dEntries = Object.entries(user.userDetails);
-    let d2Entries = Object.entries(updatedFields);
+    console.log(user.userDetails)
+    let dEntries = Object.entries(user.userDetails)
+    let d2Entries = Object.entries(updatedFields)
 
     for (let i = 0; i < dEntries.length; i++) {
         let [k, v] = dEntries[i];
