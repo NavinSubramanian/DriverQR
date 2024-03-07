@@ -151,7 +151,9 @@ app.put('/users/:id', async (req, res) => {
       console.log(dEntries[key]+" "+d2Entries[key])
       if(dEntries[key] !== d2Entries[key]){
         console.log("YES!")
-        const up = User.findByIdAndUpdate(id,{$set:{key:d2Entries[key]}},{new:true})
+        const userData = {key:d2Entries[key]} 
+        console.log(userData)
+        const up = User.findOneAndUpdate({_id:id},userData,{new:true})
         console.log(up)
       }
     })
