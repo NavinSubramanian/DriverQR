@@ -133,44 +133,40 @@ app.put('/users/:id', async (req, res) => {
     console.log(id)
 
     // Find the user by ID and update the fields
-    const user = await User.findById(id)
-    let dEntries = user.userDetails
+    // const user = await User.findById(id)
+    // let dEntries = user.userDetails
     let d2Entries = updatedFields.newRow
 
+    const upd = await User.findByIdAndUpdate(id,{$set:d2Entries},{new:true})
+    console.log(upd)
 
-    const user_b = [
-      "personName",
-      "emergencyNumber",
-      "gender",
-      "phoneNumber",
-      "address",
-      "bloodGroup",
-    ]
+    // const user_b = [
+    //   "personName",
+    //   "emergencyNumber",
+    //   "gender",
+    //   "phoneNumber",
+    //   "address",
+    //   "bloodGroup",
+    // ]
 
-    user_b.map((key)=>{
-      console.log(dEntries[key]+" "+d2Entries[key])
-      if(dEntries[key] !== d2Entries[key]){
-        console.log("YES!")
-        const userData = {[key]:d2Entries[key]} 
-        const up = User.findOneAndUpdate(
-          {_id:id},
-          {
-            $set:{[key]:d2Entries[key]}
-          },
-          {new:true}
-          , function( error, result){
-            console.log("Error"+error)
-            console.log("Succes"+result)
-          }
-          )
-      }
-    })
+    // await Promise.all(user_b.map(async (key) => {
+    //   console.log(dEntries[key] + " " + d2Entries[key]);
+    //   if (dEntries[key] !== d2Entries[key]) {
+    //     console.log("YES!");
+    //     const userData = { [key]: d2Entries[key] };
+    //     const up = await User.findOneAndUpdate(
+    //       { _id: id },
+    //       userData,
+    //       { new: true }
+    //     );
+    //     console.log(up);
+    //   }
+    // }));
 
-    if (!user) {
+    if (!upd) {
       return res.status(404).json({ message: 'User not found' });
     }
-
-    res.json({ message: 'User updated successfully', up });
+    res.json({ message: 'User updated successfully', upd });
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ message: 'Internal server error' });
