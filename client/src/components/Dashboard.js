@@ -106,15 +106,15 @@ export default function FullFeaturedCrudGrid() {
     }
   };
 
-  const processRowUpdate = async (newRow) => {
-    console.log(newRow)
-    const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.id === newRow.id ? 
+  const processRowUpdate = async (userDetails) => {
+    console.log(userDetails)
+    const updatedRow = { ...userDetails, isNew: false };
+    setRows(rows.map((row) => (row.id === userDetails.id ? 
       updatedRow 
       : 
       row)));
     try {
-      const response = await axios.put(`https://driver-qr.vercel.app/users/${newRow._id}`, { newRow });
+      const response = await axios.put(`https://driver-qr.vercel.app/users/${userDetails._id}`, { userDetails });
       console.log(response.data)
       return updatedRow
     } catch (error) {

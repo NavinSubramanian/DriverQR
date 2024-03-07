@@ -135,10 +135,8 @@ app.put('/users/:id', async (req, res) => {
     // Find the user by ID and update the fields
     // const user = await User.findById(id)
     // let dEntries = user.userDetails
-    let d2Entries = updatedFields.newRow
-
-    const upd = await User.findByIdAndUpdate(id,{$set:d2Entries},{new:true})
-    console.log(upd)
+    const upd = await User.findByIdAndUpdate(id, updatedFields, { new: true });
+    console.log(upd);
 
     // const user_b = [
     //   "personName",
