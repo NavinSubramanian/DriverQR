@@ -137,7 +137,7 @@ app.put('/users/:id', async (req, res) => {
     let dEntries = user.userDetails
     let d2Entries = updatedFields
 
-    user_b: [
+    const user_b = [
       "personName",
       "emergencyNumber",
       "gender",
