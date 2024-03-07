@@ -147,9 +147,9 @@ app.put('/users/:id', async (req, res) => {
     ]
 
     user_b.map((key)=>{
+      console.log(dEntries[key]+" "+d2Entries[key])
       if(dEntries[key] != d2Entries[key]){
         const up = User.findByIdAndUpdate(id,{$set:{key:d2Entries[key]}},{new:true})
-        console.log(up)
       }
     })
 
