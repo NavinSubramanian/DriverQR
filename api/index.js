@@ -138,12 +138,12 @@ app.put('/users/:id', async (req, res) => {
     let d2Entries = updatedFields
 
     user_b: [
-      personName,
-      emergencyNumber,
-      gender,
-      phoneNumber,
-      address,
-      bloodGroup,
+      "personName",
+      "emergencyNumber",
+      "gender",
+      "phoneNumber",
+      "address",
+      "bloodGroup",
     ]
 
     user_b.map((key)=>{
