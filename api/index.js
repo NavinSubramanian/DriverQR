@@ -130,6 +130,10 @@ app.put('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const updatedFields = req.body;
+    console.log(id)
+    console.log(req.params)
+    console.log(updatedFields)
+
 
     // Find the user by ID and update the fields
     const user = await User.findByIdAndUpdate(id, updatedFields, { new: true });

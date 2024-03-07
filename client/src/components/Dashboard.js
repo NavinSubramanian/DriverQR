@@ -114,7 +114,7 @@ export default function FullFeaturedCrudGrid() {
       : 
       row)));
     try {
-      await axios.put(`https://driver-qr.vercel.app/users/${newRow.id}`, { newRow });
+      await axios.put(`https://driver-qr.vercel.app/users/${newRow._id}`, { newRow });
       return updatedRow
     } catch (error) {
       console.error('Error updating user:', error);
