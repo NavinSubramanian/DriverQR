@@ -111,7 +111,7 @@ export default function FullFeaturedCrudGrid() {
   };
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'id', headerName: 'ID', width: 50 },
   {
     field: 'personName',
     headerName: 'Name',
@@ -121,7 +121,7 @@ export default function FullFeaturedCrudGrid() {
   {
     field: 'gender',
     headerName: 'Gender',
-    width: 100,
+    width: 80,
     editable: true,
     sortable: false,
   },
@@ -153,6 +153,34 @@ export default function FullFeaturedCrudGrid() {
     sortable: false,
     editable: true,
     width: 300,
+  },
+  {
+    field: 'disease',
+    headerName: 'Disease',
+    sortable: false,
+    editable: true,
+    width: 110,
+  },
+  {
+    field: 'allergies',
+    headerName: 'Allergies',
+    sortable: false,
+    editable: true,
+    width: 110,
+  },
+  {
+    field: 'regularHospital',
+    headerName: 'Regular Hospital',
+    sortable: false,
+    editable: true,
+    width: 170,
+  },
+  {
+    field: 'doctor',
+    headerName: 'Doctor',
+    sortable: false,
+    editable: true,
+    width: 100,
   },
     {
       field: 'actions',
