@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import call from './images/call.webp'
 import ambulance from './images/ambulance.png'
@@ -110,25 +110,17 @@ function QRCodeScanner() {
               <span className="logo">Scanhubgen</span>
           </div>
       </nav>
-      <div>
-        <p className='head' style={{ fontFamily: 'Poppins', fontSize: '25px', marginTop: '30px', width:'100%',textAlign:'center' }}>Welcome to Scanhubgen!</p>
-      </div>
-
-      <div id="details-container" style={{width:'100%',textAlign:'center',
-          padding: '20px', '@media (max-width: 600px)': { padding: '10px' },
-          '@media (min-width: 601px) and (max-width: 768px)': { padding: '15px' }, '@media (min-width: 769px) and (max-width: 1024px)': { padding: '20px' }
-      }}>
-          <p className='head1' style={{ fontFamily: 'Poppins', marginTop: '20px', marginBottom: '25px', fontSize: '25px', }}>
-              Thanks for scanning the QR code, and now you instantly access vital details of the recipient. </p>
-      </div>
 
       {error && <p>{error}</p>}
       {userDetails && (
         <div id="printable-content" style={{overflow:'hidden'}}>
           <div className='showdetails'  style={{ boxShadow: '0 0 10px rgba(255, 255, 0, 0.8)',marginBottom:'100px' }}>
             <form >
-                <img style={{ width: '100px', borderRadius: '50px', marginTop: '30px' }} src='https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_640.png' />
-                <p style={{ color: 'white', fontSize: '18px', marginTop: '8px' }}>USER</p>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
+                  <img style={{ width: '100px', borderRadius: '50px', marginTop: '30px' }} src='https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_640.png' />
+                  <p style={{ color: '#E42A3C', fontSize: '50px',textAlign:'center',position:'absolute',right:'0',bottom:'10px',fontWeight:'600' }}>{userDetails.bloodGroup}</p>
+                </div>
+                <p style={{ color: 'white', fontSize: '18px', marginTop: '8px' }}>{userDetails.personName}</p>
 
                 <div style={{ marginTop: '15px' }}>
                     <a href="tel:7904262162"><img style={{ height: '70px', width: '70px', objectFit: 'cover', paddingRight: '5px' }} src={call} alt='call' /></a>
@@ -152,7 +144,6 @@ function QRCodeScanner() {
                         color: 'white', fontSize: '16px', marginTop: '10px', textAlign: 'left',
                         lineHeight: '28px', letterSpacing: '1px'
                     }}>
-                        <p>Name: {userDetails.personName}</p>
                         <p>Gender: {userDetails.gender}</p>
                         <p>Contact no: {userDetails.phoneNumber}</p>
                         <p>Emergency contact: {userDetails.emergencyNumber}</p>
@@ -162,7 +153,7 @@ function QRCodeScanner() {
 
                 <div style={{ marginTop: '20px' }}>
                     <p style={{
-                        color: 'white', fontSize: '18px', backgroundColor: '#e10000', paddingTop: '5px',
+                        color: 'white', fontSize: '18px', backgroundColor: '#E42A3C', paddingTop: '5px',
                         paddingBottom: '5px', letterSpacing: '1px'
                     }}>Medical Information</p>
 
@@ -170,10 +161,9 @@ function QRCodeScanner() {
                         color: 'white', fontSize: '16px', marginTop: '10px', textAlign: 'left',
                         lineHeight: '25px', letterSpacing: '1px'
                     }}>
-                        <p>Disease: Diabetics</p>
-
-                        <p style={{ marginTop: '20px' }}>Regular hospital: XYZ</p>
-                        <p>Doctor: Sins</p>
+                        <p>Disease: {userDetails.disease}</p>
+                        <p style={{ marginTop: '20px' }}>Regular hospital: {userDetails.regularHospital}</p>
+                        <p>Doctor: {userDetails.doctor}</p>
                     </div>
                 </div>
 
@@ -226,6 +216,11 @@ function InfoPrompt({ onSubmit }) {
     phoneNumber: '',
     emergencyNumber: '',
     address: '',
+    profileImage: '',
+    disease: '',
+    allergies: '',
+    regularHospital: '',
+    doctor: '',
   });
 
   const handleInputChange = (e) => {
@@ -246,16 +241,193 @@ function InfoPrompt({ onSubmit }) {
 
     const handleButtonClick = () => {
         setShowAdditionalFields(!showAdditionalFields);
+        
     };
 
     const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setSelectedImage(file);
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0])
+      reader.onload = () => {
+        const res = reader.result
+        setInfoData(prevData => ({
+          ...prevData,
+          profileImage : res,
+        }));
+      }
     };
-
+    
   return (
     <div>
-      <div>
+      <div style={{display:'flex',flexDirection:'column',rowGap:'30px',padding:'20px'}}>
+        <p className='head' style={{  fontSize: '25px'}}>
+            Welcome to RayyanScanhub!,</p>
+
+        <div id="details-container">
+            <p className='head1' style={{  fontSize: '25px', height: '65px' }}>
+                Oops! We couldn't find your data. Do read through instructions and  fill in the form below to ensure your information is securely stored. </p>
+        </div>
+        <div>
+            <h1 style={{  fontSize: '22px', fontWeight: '600' }}>
+                Prior to filling in your details, carefully review the instructions.
+            </h1>
+            <div style={{   fontSize: '18px', lineHeight: '25px', letterSpacing: '0.5px',paddingLeft:'20px',marginTop:'10px' }}>
+                <ul>
+                    <li style={{ marginBottom: '10px' }}>Your details shape your safety net. Fill the columns accurately—this one-time entry ensures precision. For any adjustments, the shop or the provided contact awaits your request.</li>
+                    <li style={{ marginBottom: '10px' }}>Be proactive in emergencies. Fill out all columns for thorough details. Your information is crucial for swift assistance in case of lost items or emergencies.</li>
+                    <li style={{ marginBottom: '10px' }}>Empower your safety plan. Complete all fields for robust details. In case of QR loss or damage, our shop is your go-to for replacements or restoration.</li>
+                    <li style={{ marginBottom: '10px' }}>Precision matters. Provide comprehensive details in one go. For any necessary tweaks, the shop or the contact person listed below is ready to assist.</li>
+                </ul>
+            </div>
+        </div>
+
+        <button className='buttons'>Input your details</button>
+      </div>
+
+
+
+
+            {/* input section user */}
+            <div className='container'>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+                    <hr style={{ flex: 1, marginRight: '10px' }} />
+                    <p style={{ color: 'gray' }}>Personal Details</p>
+                    <hr style={{ flex: 1, marginLeft: '10px' }} />
+                </div>
+                <div style={{ marginTop: '5px' }}>
+                    <label className="label" htmlFor="Name">
+                        Upload image as .png
+                    </label>
+                    <input style={{ marginBottom: '25px' }}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                    />
+
+                    {selectedImage && (
+                        <img
+                            style={{ width: '100px', height: '100px', marginTop: '10px' }}
+                            src={URL.createObjectURL(selectedImage)}
+                            alt='Selected Image'
+                        />
+                    )}
+                    <label className="label" htmlFor="Name">
+                        Name
+                    </label>
+                    <input
+                        className="input-field"
+                        type="text"
+                        placeholder="Name..."
+                        name="personName"
+                        value={infoData.personName}
+                        onChange={handleInputChange}
+                    />
+                    <label className="label" htmlFor="gender">
+                        Gender
+                    </label>
+                    <select className="select-field" 
+                        name="gender"
+                        value={infoData.gender}
+                        onChange={handleInputChange}>
+                        <option value="" disabled>--Select gender--</option>
+                        <option value="M" >Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                    <label className="label" htmlFor="Primary">
+                        Contact No
+                    </label>
+                    <input
+                        className="input-field"
+                        type="number"
+                        placeholder="Primary No..."
+                        step="0.01"
+                        name="phoneNumber"
+                        value={infoData.phoneNumber}
+                        onChange={handleInputChange}
+                    />
+                    <label className="label" htmlFor="Secondary">
+                        Emergency contact
+                    </label>
+                    <input
+                        className="input-field"
+                        type="number"
+                        placeholder="Emergency contact..."
+                        step="0.01"
+                        name="emergencyNumber"
+                        value={infoData.emergencyNumber}
+                        onChange={handleInputChange}
+                    />
+                    <label className="label" htmlFor="group">
+                        Blood Group
+                    </label>
+                    <select className="select-field" 
+                        name="bloodGroup"
+                        value={infoData.bloodGroup}
+                        onChange={handleInputChange} >
+                        <option value="" disabled>--Select Blood group--</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                    <label className="label" htmlFor="address">
+                        Address:
+                    </label>
+                    <textarea className="textarea-field" name="address"
+                        value={infoData.address}
+                        onChange={handleInputChange}/>
+                </div>
+
+                {/* medical details */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', marginTop: '30px' }}>
+                    <hr style={{ flex: 1, marginRight: '10px' }} />
+                    <p style={{ color: 'gray' }}>Medical Details</p>
+                    <hr style={{ flex: 1, marginLeft: '10px' }} />
+                </div>
+
+
+                <div>
+                    <label className="label" htmlFor="disease">
+                        Disease
+                    </label>
+                    <textarea className="textarea-field" 
+                    name="disease"
+                    value={infoData.disease}
+                    onChange={handleInputChange}/>
+                    <label className="label" htmlFor="allegry">
+                        Allegries
+                    </label>
+                    <textarea className="textarea-field" 
+                    name="allergies"
+                    value={infoData.allergies}
+                    onChange={handleInputChange}/>
+                    <label className="label" htmlFor="hospital">
+                        Regular Hospital
+                    </label>
+                    <textarea className="textarea-field" 
+                    name="regularHospital"
+                    value={infoData.regularHospital}
+                    onChange={handleInputChange}/>
+                    <label className="label" htmlFor="doctor">
+                        Doctor
+                    </label>
+                    <textarea className="textarea-field" 
+                    name="doctor"
+                    value={infoData.doctor}
+                    onChange={handleInputChange}/>
+                </div>
+
+
+
+
+                <button className="button" type="button">
+                    <Link style={{ textDecoration: 'none', color: 'white' }} to='/'>Submit</Link>
+                </button>
+            </div>
+      {/* <div>
           <p style={{ fontFamily: 'Poppins', marginBottom: '20px', fontWeight: '600', fontSize: '20px', width:'100%',textAlign:'center'}}>It looks like you have not filled the information, Please enter your info to save the data,</p>
       </div>
       <h2>Enter Your Information</h2>
@@ -267,7 +439,7 @@ function InfoPrompt({ onSubmit }) {
         <input type="text" name="emergencyNumber" placeholder="Phone Number" value={infoData.emergencyNumber} onChange={handleInputChange} />
         <input type="text" name="address" placeholder="Address" value={infoData.address} onChange={handleInputChange} />
         <button type="submit">Submit</button>
-      </form>
+      </form> */}
     </div>
   );
 }

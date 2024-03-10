@@ -19,6 +19,14 @@ function QRCodeGenerator() {
   const [gender, setGender] = useState('');
   const [bloodGroup, setBloodGroup] = useState('');
   const [qrCodeData, setQrCodeData] = useState('');
+  const [disease, setDisease] = useState('');
+  const [regularHospital, setRegularHospital] = useState('');
+  const [doctor, setDoctor] = useState('');
+  // profileImage: String,
+  //   disease: String,
+  //   allergies: String,
+  //   regularHospital: String,
+  //   doctor:String,
   const [showQRCode, setShowQRCode] = useState(false);
   const [animate, setAnimate] = useState(false);
 

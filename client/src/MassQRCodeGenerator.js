@@ -26,6 +26,11 @@ const MassQRCodeGenerator = () => {
             gender: '',
             address: '',
             bloodGroup: '',
+            profileImage: '',
+            disease: '',
+            allergies: '',
+            regularHospital: '',
+            doctor: '',
           }
         });
         codes.push({ uniqueIdentifier: uniqueIdentifier, qrCodeData: response.data.qrCodeData });

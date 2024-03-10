@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
     phoneNumber: String,
     address: String,
     bloodGroup: String,
+    profileImage: String,
+    disease: String,
+    allergies: String,
+    regularHospital: String,
+    doctor:String,
   },
   qrCodeData: { type: String, required: true, unique: true }, 
 });

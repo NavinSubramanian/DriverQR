@@ -613,3 +613,23 @@
   border: 1px solid black;
   color: black;
 }
+
+
+
+
+
+
+
+/* Temp */
+
+@media screen and (max-width:700px) {
+  #details-container{
+    margin-bottom: 50px;
+  }
+}
+
+@media screen and (max-width:500px) {
+  #details-container{
+    margin-bottom: 150px;
+  }
+}
