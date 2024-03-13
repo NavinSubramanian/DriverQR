@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
 import logo from './images/logo.png'
 import Flanzer from './images/flanzer.png'
 import './app.css'
@@ -53,10 +52,10 @@ const MassQRCodeGenerator = () => {
   };
 
   const printQRCodeContainer = () => {
-    
+
     const printableContent = document.getElementById('codecontainer').innerHTML;
     const printWindow = window.open('', '_blank');
-    
+
     if (printWindow) {
       printWindow.document.open();
       printWindow.document.write(`
@@ -145,12 +144,15 @@ const MassQRCodeGenerator = () => {
   return (
     <div>
       <Navbar />
-      <p style={{textAlign:'center',fontFamily:'',marginBottom:'40px',marginTop:'20px',fontSize:'30px',fontWeight:'600'}}>Mass qr generator...</p>
-      <div style={{ textAlign: 'center',display:'flex',columnGap:'20px',alignItems:'center',justifyContent:'center' }}>
-        <label className="label1" style={{fontSize:'15px',margin:"0"}}>
+      <p style={{ textAlign: 'center', fontFamily: '', marginBottom: '40px', marginTop: '20px', fontSize: '30px', fontWeight: '600' }}>
+        Mass QR Generator...</p>
+
+      <div style={{ textAlign: 'center', display: 'flex', columnGap: '20px', alignItems: 'center', justifyContent: 'center' }}>
+        <label className="label1" style={{ fontSize: '15px', margin: "0" }}>
           Number of QR Codes:
-          <input className="input1" style={{height:'10px',width:'60px',borderRadius:'6px',border:'1px solid #0000005c'}} type="number" id="numberOfCodes" value={numberOfCodes} onChange={(e) => setNumberOfCodes(e.target.value)} />
+          <input className="input1" style={{ height: '10px', width: '60px', borderRadius: '6px', border: '1px solid #0000005c' }} type="number" id="numberOfCodes" value={numberOfCodes} onChange={(e) => setNumberOfCodes(e.target.value)} />
         </label>
+
         <button className="button3" onClick={generateQRCode}>Generate QR Codes</button>
         <button className="print-button" onClick={printQRCodeContainer}>Print</button>
       </div>
@@ -161,23 +163,27 @@ const MassQRCodeGenerator = () => {
       <div id='codecontainer'>
         <div className="qr-code-container">
           {generatedCodes.map((code) => (
-            <div key={code.generatedCodes} className="qr-code" style={{height:'75.59px',width:'185.197px'}}>
+            <div key={code.generatedCodes} className="qr-code" style={{ height: '75.59px', width: '187.08661417px' }}>
               <div className="qr-code-content">
-                <div style={{display:'flex',position:'relative',height:'75.59px',width:'92.598px',alignItems:'center',justifyContent:'center'}}>
-                    <h6 className='float' style={{fontSize:'5px',width:'100%',}}>SCAN FOR EMERGENCY/LOST</h6>
-                    <div className='floatdiv'>
-                        <h6 style={{fontWeight:'300',display:'flex',justifyContent:'space-between',fontSize:'3px',alignItems:'center',textAlign:'center'}}>powered by <span style={{marginLeft:'2px',fontWeight:'500',fontSize:'4px'}}>
-                            <img src={Flanzer} style={{height:'5px',width:'4.5px',position:'relative',top:'1.2px',right:'1px'}}></img>
-                            theflanzer.com
-                            </span>
-                        </h6>
-                    </div>
-                    <div className="tilted-wrapper">
-                        <p className="tilted-text">{code.uniqueIdentifier}</p>
-                    </div>
-                    <img src={code.qrCodeData} style={{height:'55px',width:'55px'}} alt={`QR Code for ${code.uniqueIdentifier}`} />
+                <div style={{
+                  display: 'flex', position: 'relative', height: '75.59px', width: '92.598px', alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <h6 className='float' style={{ fontSize: '5px', width: '100%', }}>SCAN FOR EMERGENCY/LOST</h6>
+
+                  <div className='floatdiv'>
+                    <h6 style={{ fontWeight: '300', display: 'flex', justifyContent: 'space-between', fontSize: '3px', alignItems: 'center', textAlign: 'center' }}>powered by <span style={{ marginLeft: '2px', fontWeight: '500', fontSize: '4px' }}>
+                      <img src={Flanzer} style={{ height: '5px', width: '4.5px', position: 'relative', top: '1.2px', right: '1px' }}></img>
+                      theflanzer.com
+                    </span>
+                    </h6>
+                  </div>
+                  <div className="tilted-wrapper">
+                    <p className="tilted-text">{code.uniqueIdentifier}</p>
+                  </div>
+                  <img src={code.qrCodeData} style={{ height: '65px', width: '65px', }} alt={`QR Code for ${code.uniqueIdentifier}`} />
                 </div>
-                <img style={{ height: '75.59px', width: '92.598px' }} src={logo} alt='Logo' />
+                <img style={{ height: '76.724409449px', width: '92.598px' }} src={logo} alt='Logo' />
               </div>
             </div>
           ))}

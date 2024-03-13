@@ -2,11 +2,10 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-
 import './app.css'
 
-import Navbar from './components/Navbar'
 import Qrcode from './components/Qrcode';
+import Navbar from './components/Navbar';
 
 import { Link } from 'react-router-dom';
 
@@ -74,7 +73,7 @@ function QRCodeGenerator() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar/>
       <div className='container'>
         <div className='header'>
           <h1 style={{ textAlign: 'center', fontFamily:'Arial'}}>QR Generator - Provide Details</h1>

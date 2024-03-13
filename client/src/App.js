@@ -22,6 +22,7 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path='/' element={<Landingpage />} exact></Route>
             <Route path='/generate' element={<QRCodeGenerator />} exact></Route>
+            <Route path='/scan' element={<QRCodeScanner />} exact></Route>
             <Route path='/massgen' element={<MassQRCodeGenerator />} exact></Route>
             <Route path="/dashboard" element={<Dashboard />} exact></Route>
           </Route>

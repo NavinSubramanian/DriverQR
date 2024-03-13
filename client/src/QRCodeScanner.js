@@ -15,7 +15,7 @@ import update from "./images/update.png";
 import logo from './images/logo.png'
 import flanzer1 from './images/flanzer1.png'
 import Footer from "./components/Footer";
-import Navbar from "./components/Navbar1";
+
 
 function QRCodeScanner() {
   const [userDetails, setUserDetails] = useState(null);
@@ -106,23 +106,19 @@ function QRCodeScanner() {
   };
 
   return (
-    <div style={{ overflow: "hidden" }}>
-      <nav className="navbar" style={{backgroundColor:'black',padding:'8px'}}>
-            <div className="left-section">
-                <img className='logo' src={logo} alt='logo' style={{height:'80px',width:'80px'}} />
-                <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
-                    <span className="powered-by">
-                        <Link style={{ color: 'white', textDecoration: 'none', fontSize: '15px' }} target="_blank"  to='https://www.theflanzer.com/'>
-                            supported by</Link></span>
-                    <img style={{ height: '18px', paddingLeft: '5px', }} src={flanzer1} alt='flanzer1' />
-                </div>
-            </div>
-            <div style={{ marginRight: '20px' }}>
-                <button className="login-button"><Link style={{ color: 'black', textDecoration: 'none' }}
-                to='https://www.theflanzer.com/'>Visit Flanzer</Link>
-                </button></div>
+    <div style={{ overflow: "hidden", }}>
+      <nav className="navbar" style={{ backgroundColor: 'black', padding: '8px' }}>
+        <div className="left-section">
+          <img className='logo' src={logo} alt='logo' style={{ height: '80px', width: '80px' }} />
+          <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
+            <span className="powered-by">
+              <Link style={{ color: 'white', textDecoration: 'none', fontSize: '15px' }} target="_blank" to='https://www.theflanzer.com/'>
+                supported by</Link></span>
+            <img style={{ height: '18px', paddingLeft: '5px', }} src={flanzer1} alt='flanzer1' />
+          </div>
+        </div>
 
-        </nav>
+      </nav>
 
       {error && <p>{error}</p>}
       {userDetails && (
@@ -130,8 +126,9 @@ function QRCodeScanner() {
           <div
             className="showdetails"
             style={{
-              boxShadow: "0 0 10px rgba(255, 255, 0, 0.8)",
+              boxShadow: "0 0 10px rgba(255, 255, 0, 0.9)",
               marginBottom: "100px",
+              backgroundColor: 'black',
             }}
           >
             <form>
@@ -148,8 +145,8 @@ function QRCodeScanner() {
                     width: "100px",
                     borderRadius: "50px",
                     marginTop: "30px",
-                    height:'100px',
-                    objectFit:'cover'
+                    height: '100px',
+                    objectFit: 'cover'
                   }}
                   src={userDetails.profileImage}
                 />
@@ -443,7 +440,12 @@ function InfoPrompt({ onSubmit }) {
           padding: "20px",
         }}
       >
-        <p className="head" style={{ fontSize: "25px" }}>
+        <p className="head" style={{
+          fontSize: "25px",
+          '@media (max-width: 768px)': {
+            fontSize: "15pxpx"
+          }
+        }}>
           Welcome to RayyanScanhub!,
         </p>
 

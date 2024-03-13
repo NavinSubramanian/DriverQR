@@ -1,7 +1,8 @@
 import React from 'react'
-import flanzer1 from '../images/flanzer1.png'
-
+import logo from '../images/logo.png'
 import '../app.css'
+import { Link } from 'react-router-dom'
+
 
 const Footer = () => {
     return (
@@ -9,20 +10,19 @@ const Footer = () => {
             <div className="footerSection">
                 <div className="footerTop">
                     <div className="footerLeft">
-                        <img style={{height:'40px',}} src={flanzer1} alt='flanzer1' />
-                        <p style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Meet Scanhubgen - a product from theflanzer.com Effortlessly create discreet QR codes with vital contact details.
-                            A quick scan in emergencies grants prompt access, forging efficient connections.
-                            Elevate security through our user-centric platform,
-                            ensuring professionalism in safeguarding possessions and well-being.</p>
+                        <img style={{height:'100px',}} src={logo} alt='logo' />
+                        <p style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Meet Rayyanscans - a product from theflanzer.com 
+                        <br/>Generate discreet QR codes with essential contact details for emergency access. Elevate security and
+                         professionalism through our user-centric platform.</p>
                     </div>
                     <div className="footerRight">
-                        <h3 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Contact Us</h3>
-                        <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Address: 2321 New Design Str, Lorem Ipsum10 Hudson Yards, USA</h4>
-                        <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Tel: + (123) 2500-567-8988 <br />Mail: supportlms@gmail.com</h4>
+                        <h3 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Contact Us,</h3>
+                        <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Address: 360, 640, Anna Salai, Thousand Lights West, Thousand Lights, Chennai, Tamil Nadu 600006</h4>
+                        <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Tel:  044 4864 1135 <br />Instagram: <Link style={{color: '#ffdd00'}} to='https://www.instagram.com/rayyan_progear_official/'>rayyan_progear_official</Link></h4>
                     </div>
                 </div>
                 <div className="footerBottom">
-                    <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Copyright © 2024 Scabhubgen | Powered by Flanzer</h4>
+                    <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Copyright © 2024 Rayyanscan | <Link style={{color: '#ffdd00',textDecoration:'none'}}>Powered by Flanzer</Link></h4>
                 </div>
             </div>
         </div>

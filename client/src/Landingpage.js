@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 const Landingpage = () => {
     return (
         <div>
-            <Navbar />
+            <Navbar/>
             <div>
                 <p className='head' style={{ fontSize: '25px', marginTop: '30px', marginLeft: '100px' }}>
                     Welcome to Scanhubgen!,</p>
@@ -24,23 +24,25 @@ const Landingpage = () => {
                     possessions and well-being with utmost professionalism.</p>
                 <hr style={{ marginTop: '20px', marginLeft: '100px', maxWidth: '1400px' }} />
             </div>
+            
             <div>
                 <p className='head' style={{ fontSize: '25px', marginTop: '30px', marginLeft: '100px' }}>
                     Secure Connections Made Simple</p>
             </div>
+
             <div className="item__layout">
                 <div className="flex-item">
                     <img className="item1" src='https://me-qr.com/data/front/static_preview/651415ebca4c28.80230463.png' />
                     <p class="item-body">Admin site generation</p>
-                    <p class="item-stat">Take control with your personalized QR code—swiftly connect with others in times of need,
-                        enhancing the safety of your belongings effortlessly.</p>
+                    <p class="item-stat">Empower safety and connection with your personalized QR code. Swiftly connect in times of need for 
+                    enhanced security.</p>
                     <button className='button2'>
                         <Link style={{ color: 'white', textDecoration: 'none' }} to='/generate'>Enter</Link>
                     </button>
                 </div>
 
                 <div className="flex-item">
-                    <img className="item1" src='https://me-qr.com/data/front/static_preview/651415ebca4c28.80230463.png' />
+                    <img className="item1" src='https://uniqode.wpengine.com/wp-content/uploads/2019/07/Bulk.png' />
                     <p class="item-body">Mass Generation QR</p>
                     <p class="item-stat">Enter the required number and generate the qr which are readymade to be printed when needed.</p>
                     <button className='button2'>

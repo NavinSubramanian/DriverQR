@@ -43,7 +43,7 @@ export default function FullFeaturedCrudGrid() {
         // Transform the user data to match the column fields
         const transformedUsers = response.data
           .filter(user => user.userDetails && user.userDetails.personName) // Filter out undefined or missing data
-          .map((user,index) => ({
+          .map((user, index) => ({
             ...user.userDetails,
             id: index + 1,
             _id: user._id,
@@ -92,9 +92,9 @@ export default function FullFeaturedCrudGrid() {
   const processRowUpdate = async (userDetails) => {
     console.log(userDetails)
     const updatedRow = { ...userDetails, isNew: false };
-    setRows(rows.map((row) => (row.id === userDetails.id ? 
-      updatedRow 
-      : 
+    setRows(rows.map((row) => (row.id === userDetails.id ?
+      updatedRow
+      :
       row)));
     try {
       const response = await axios.put(`https://driver-qr.vercel.app/users/${userDetails._id}`, { userDetails });
@@ -112,76 +112,76 @@ export default function FullFeaturedCrudGrid() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
-  {
-    field: 'personName',
-    headerName: 'Name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'gender',
-    headerName: 'Gender',
-    width: 80,
-    editable: true,
-    sortable: false,
-  },
-  {
-    field: 'phoneNumber',
-    headerName: 'Phone Number',
-    type: 'number',
-    width: 130,
-    editable: true,
-    sortable: false,
-  },
-  {
-    field: 'emergencyNumber',
-    headerName: 'Emergency Number',
-    sortable: false,
-    editable: true,
-    width: 160,
-  },
-  {
-    field: 'bloodGroup',
-    headerName: 'Blood Group',
-    sortable: false,
-    editable: true,
-    width: 120,
-  },
-  {
-    field: 'address',
-    headerName: 'Address',
-    sortable: false,
-    editable: true,
-    width: 300,
-  },
-  {
-    field: 'disease',
-    headerName: 'Disease',
-    sortable: false,
-    editable: true,
-    width: 110,
-  },
-  {
-    field: 'allergies',
-    headerName: 'Allergies',
-    sortable: false,
-    editable: true,
-    width: 110,
-  },
-  {
-    field: 'regularHospital',
-    headerName: 'Regular Hospital',
-    sortable: false,
-    editable: true,
-    width: 170,
-  },
-  {
-    field: 'doctor',
-    headerName: 'Doctor',
-    sortable: false,
-    editable: true,
-    width: 100,
-  },
+    {
+      field: 'personName',
+      headerName: 'Name',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'gender',
+      headerName: 'Gender',
+      width: 80,
+      editable: true,
+      sortable: false,
+    },
+    {
+      field: 'phoneNumber',
+      headerName: 'Phone Number',
+      type: 'number',
+      width: 130,
+      editable: true,
+      sortable: false,
+    },
+    {
+      field: 'emergencyNumber',
+      headerName: 'Emergency Number',
+      sortable: false,
+      editable: true,
+      width: 160,
+    },
+    {
+      field: 'bloodGroup',
+      headerName: 'Blood Group',
+      sortable: false,
+      editable: true,
+      width: 120,
+    },
+    {
+      field: 'address',
+      headerName: 'Address',
+      sortable: false,
+      editable: true,
+      width: 300,
+    },
+    {
+      field: 'disease',
+      headerName: 'Disease',
+      sortable: false,
+      editable: true,
+      width: 110,
+    },
+    {
+      field: 'allergies',
+      headerName: 'Allergies',
+      sortable: false,
+      editable: true,
+      width: 110,
+    },
+    {
+      field: 'regularHospital',
+      headerName: 'Regular Hospital',
+      sortable: false,
+      editable: true,
+      width: 170,
+    },
+    {
+      field: 'doctor',
+      headerName: 'Doctor',
+      sortable: false,
+      editable: true,
+      width: 100,
+    },
     {
       field: 'actions',
       type: 'actions',
@@ -256,8 +256,8 @@ export default function FullFeaturedCrudGrid() {
             toolbar: GridToolbar,
           }}
           slotProps={{
-            toolbar: { 
-              setRows, 
+            toolbar: {
+              setRows,
               setRowModesModel,
               showQuickFilter: true,
             },
