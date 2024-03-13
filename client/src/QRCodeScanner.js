@@ -11,10 +11,12 @@ import card from "./images/card.png";
 import download from "./images/download.png";
 import history from "./images/history.png";
 import update from "./images/update.png";
-
 import logo from './images/logo.png'
 import flanzer1 from './images/flanzer1.png'
+
 import Footer from "./components/Footer";
+import Footer2 from "./components/Footer2";
+import ConfirmationModal from "./components/ConfirmationModal";
 
 
 function QRCodeScanner() {
@@ -106,23 +108,22 @@ function QRCodeScanner() {
   };
 
   return (
-    <div style={{ overflow: "hidden", }}>
-      <nav className="navbar" style={{ backgroundColor: 'black', padding: '8px' }}>
+    <div style={{ overflow: "hidden",minHeight:'100vh' }}>
+      <nav className="navbar" style={{ backgroundColor: 'black', padding: '8px',display:'flex', alignItems:'center', justifyContent:'center',position:'sticky',top:'0',flexDirection:'column',boxShadow: "0 0 10px rgba(255, 255, 0, 0.9)", }}>
         <div className="left-section">
           <img className='logo' src={logo} alt='logo' style={{ height: '80px', width: '80px' }} />
-          <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
+        </div>
+        <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
             <span className="powered-by">
               <Link style={{ color: 'white', textDecoration: 'none', fontSize: '15px' }} target="_blank" to='https://www.theflanzer.com/'>
                 supported by</Link></span>
             <img style={{ height: '18px', paddingLeft: '5px', }} src={flanzer1} alt='flanzer1' />
           </div>
-        </div>
-
       </nav>
 
       {error && <p>{error}</p>}
       {userDetails && (
-        <div id="printable-content" style={{ overflow: "hidden" }}>
+        <div id="printable-content" style={{ overflow: "hidden", backgroundColor:'black' }}>
           <div
             className="showdetails"
             style={{
@@ -161,12 +162,25 @@ function QRCodeScanner() {
                     fontWeight: "600",
                   }}
                 >
-                  {userDetails.bloodGroup}
                 </p>
               </div>
               <p style={{ color: "white", fontSize: "18px", marginTop: "8px" }}>
                 {userDetails.personName}
               </p>
+                <p style={{color:'#E42A3C'}}><b >Blood Group : {userDetails.bloodGroup}</b></p>
+              <p
+                  style={{
+                    color: "white",
+                    fontSize: "18px",
+                    marginTop: "30px",
+                    backgroundColor: "#E42A3C",
+                    paddingTop: "5px",
+                    paddingBottom: "5px",
+                    letterSpacing: "1px",
+                  }}
+                >
+                  Quick Links
+                </p>
 
               <div style={{ marginTop: "15px" }}>
                 <a href="tel:7904262162">
@@ -206,30 +220,6 @@ function QRCodeScanner() {
                 />
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginTop: "20px",
-                }}
-              >
-                <p
-                  style={{
-                    color: "white",
-                    fontSize: "22px",
-                    letterSpacing: "1px",
-                  }}
-                >
-                  Verification status
-                </p>
-                <img
-                  style={{ height: "30px", width: "30px" }}
-                  src={cross}
-                  alt="cross"
-                />
-              </div>
-
               <div>
                 <p
                   style={{
@@ -255,10 +245,10 @@ function QRCodeScanner() {
                     letterSpacing: "1px",
                   }}
                 >
-                  <p>Gender: {userDetails.gender}</p>
-                  <p>Contact no: {userDetails.phoneNumber}</p>
-                  <p>Emergency contact: {userDetails.emergencyNumber}</p>
-                  <p>Address: {userDetails.address}</p>
+                  <p><b>Gender:</b> {userDetails.gender}</p>
+                  <p><b>Contact no:</b> {userDetails.phoneNumber}</p>
+                  <p><b>Emergency contact:</b> {userDetails.emergencyNumber}</p>
+                  <p><b>Address:</b> {userDetails.address}</p>
                 </div>
               </div>
 
@@ -267,7 +257,7 @@ function QRCodeScanner() {
                   style={{
                     color: "white",
                     fontSize: "18px",
-                    backgroundColor: "#E42A3C",
+                    backgroundColor:'#FF782D',
                     paddingTop: "5px",
                     paddingBottom: "5px",
                     letterSpacing: "1px",
@@ -286,12 +276,12 @@ function QRCodeScanner() {
                     letterSpacing: "1px",
                   }}
                 >
-                  <p>Disease: {userDetails.disease}</p>
-                  <p>Allegries: {userDetails.allergies}</p>
+                  <p>Disease: {userDetails.disease === "" ? "Nil" : userDetails.bloodGroup}</p>
+                  <p>Allegries: {userDetails.disease === "" ? "Nil" : userDetails.allergies}</p>
                   <p style={{ marginTop: "20px" }}>
-                    Regular hospital: {userDetails.regularHospital}
+                    Regular hospital: {userDetails.disease === "" ? "Nil" : userDetails.regularHospital}
                   </p>
-                  <p>Doctor: {userDetails.doctor}</p>
+                  <p>Doctor: {userDetails.disease === "" ? "Nil" : userDetails.doctor}</p>
                 </div>
               </div>
 
@@ -309,75 +299,18 @@ function QRCodeScanner() {
                 }}
                 onClick={handleContactDownload}
               >
-                Downloads
+                Download This Page
               </button>
 
-              <div style={{ marginTop: "20px" }}>
-                <img
-                  style={{
-                    height: "30px",
-                    width: "30px",
-                    objectFit: "cover",
-                    paddingRight: "5px",
-                  }}
-                  src={card}
-                  alt="card"
-                />
-                <img
-                  style={{
-                    height: "30px",
-                    width: "30px",
-                    objectFit: "cover",
-                    paddingRight: "10px",
-                  }}
-                  src={download}
-                  alt="download"
-                />
-                <img
-                  style={{
-                    height: "30px",
-                    width: "30px",
-                    objectFit: "cover",
-                    paddingRight: "5px",
-                  }}
-                  src={history}
-                  alt="history"
-                />
-                <img
-                  style={{
-                    height: "30px",
-                    width: "30px",
-                    objectFit: "cover",
-                    paddingRight: "10px",
-                  }}
-                  src={download}
-                  alt="download"
-                />
-                <img
-                  style={{ height: "30px", width: "30px", objectFit: "cover" }}
-                  src={update}
-                  alt="update"
-                />
-              </div>
+              <p style={{margin:'20px auto',color:'white',fontSize:'10px'}}><i>*For any changes contact RayyanScans</i></p>
+
             </form>
           </div>
         </div>
-        // <div>
-        //   <div>
-        //       <p style={{ fontFamily: 'Poppins', marginBottom: '20px', fontWeight: '600', fontSize: '20px', width:'100%',textAlign:'center'}}>Here is the scanned information of the recipient,</p>
-        //   </div>
-        //   <h2>User Details</h2>
-        //   <p><strong>Name:</strong></p>
-        //   <p><strong>Gender:</strong></p>
-        //   <p><strong>Blood Group:</strong> {userDetails.bloodGroup}</p>
-        //   <p><strong>Phone Number:</strong></p>
-        //   <p><strong>Emergency Number:</strong></p>
-        //   <p><strong>Address:</strong></p>
-        // </div>
       )}
       {showInfoPrompt && <InfoPrompt onSubmit={handleInfoSubmit} />}
 
-      <Footer />
+      <Footer2 />
     </div>
   );
 }
@@ -410,6 +343,8 @@ function InfoPrompt({ onSubmit }) {
     e.preventDefault();
     onSubmit(infoData);
   };
+
+  
 
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -451,7 +386,7 @@ function InfoPrompt({ onSubmit }) {
 
         <div id="details-container">
           <p className="head1" style={{ fontSize: "25px", height: "65px" }}>
-            Oops! We couldn't find your data. Do read through instructions and
+            We couldn't find your data. Please do read through instructions and
             fill in the form below to ensure your information is securely
             stored.{" "}
           </p>
@@ -495,7 +430,7 @@ function InfoPrompt({ onSubmit }) {
           </div>
         </div>
 
-        <button className="buttons">Input your details</button>
+        {/* <button className="buttons">Input your details</button> */}
       </div>
 
       {/* input section user */}
@@ -514,7 +449,7 @@ function InfoPrompt({ onSubmit }) {
         </div>
         <form style={{ marginTop: "5px" }} onSubmit={handleSubmit}>
           <label className="label" htmlFor="Name">
-            Upload image as .png
+            Upload image as .png<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
           </label>
           <input
             style={{ marginBottom: "25px" }}
@@ -531,7 +466,7 @@ function InfoPrompt({ onSubmit }) {
             />
           )}
           <label className="label" htmlFor="Name">
-            Name
+            Name<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
           </label>
           <input
             className="input-field"
@@ -542,7 +477,7 @@ function InfoPrompt({ onSubmit }) {
             onChange={handleInputChange}
           />
           <label className="label" htmlFor="gender">
-            Gender
+            Gender<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
           </label>
           <select
             className="select-field"
@@ -557,7 +492,7 @@ function InfoPrompt({ onSubmit }) {
             <option value="F">Female</option>
           </select>
           <label className="label" htmlFor="Primary">
-            Contact No
+            Contact No<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
           </label>
           <input
             className="input-field"
@@ -569,7 +504,7 @@ function InfoPrompt({ onSubmit }) {
             onChange={handleInputChange}
           />
           <label className="label" htmlFor="Secondary">
-            Emergency contact
+            Emergency contact<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
           </label>
           <input
             className="input-field"
@@ -581,7 +516,7 @@ function InfoPrompt({ onSubmit }) {
             onChange={handleInputChange}
           />
           <label className="label" htmlFor="group">
-            Blood Group
+            Blood Group<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
           </label>
           <select
             className="select-field"
@@ -628,7 +563,7 @@ function InfoPrompt({ onSubmit }) {
 
           <div>
             <label className="label" htmlFor="disease">
-              Disease
+              Disease<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
             </label>
             <textarea
               className="textarea-field"
@@ -637,7 +572,7 @@ function InfoPrompt({ onSubmit }) {
               onChange={handleInputChange}
             />
             <label className="label" htmlFor="allegry">
-              Allegries
+              Allegries<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
             </label>
             <textarea
               className="textarea-field"
@@ -646,7 +581,7 @@ function InfoPrompt({ onSubmit }) {
               onChange={handleInputChange}
             />
             <label className="label" htmlFor="hospital">
-              Regular Hospital
+              Regular Hospital<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
             </label>
             <textarea
               className="textarea-field"
@@ -655,7 +590,7 @@ function InfoPrompt({ onSubmit }) {
               onChange={handleInputChange}
             />
             <label className="label" htmlFor="doctor">
-              Doctor
+              Doctor<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
             </label>
             <textarea
               className="textarea-field"
@@ -670,21 +605,10 @@ function InfoPrompt({ onSubmit }) {
           </button>
         </form>
       </div>
-      {/* <div>
-          <p style={{ fontFamily: 'Poppins', marginBottom: '20px', fontWeight: '600', fontSize: '20px', width:'100%',textAlign:'center'}}>It looks like you have not filled the information, Please enter your info to save the data,</p>
-      </div>
-      <h2>Enter Your Information</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="personName" placeholder="Your Name" value={infoData.personName} onChange={handleInputChange} />
-        <input type="text" name="gender" placeholder="Gender" value={infoData.gender} onChange={handleInputChange} />
-        <input type="text" name="bloodGroup" placeholder="Blood Group" value={infoData.bloodGroup} onChange={handleInputChange} />
-        <input type="text" name="phoneNumber" placeholder="Phone Number" value={infoData.phoneNumber} onChange={handleInputChange} />
-        <input type="text" name="emergencyNumber" placeholder="Phone Number" value={infoData.emergencyNumber} onChange={handleInputChange} />
-        <input type="text" name="address" placeholder="Address" value={infoData.address} onChange={handleInputChange} />
-        <button type="submit">Submit</button>
-      </form> */}
     </div>
   );
 }
+
+
 
 export default QRCodeScanner;
