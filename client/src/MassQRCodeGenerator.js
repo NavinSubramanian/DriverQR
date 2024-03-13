@@ -145,7 +145,7 @@ const MassQRCodeGenerator = () => {
     <div>
       <Navbar />
       <p style={{ textAlign: 'center', fontFamily: '', marginBottom: '40px', marginTop: '20px', fontSize: '30px', fontWeight: '600' }}>
-        Mass QR Generator...</p>
+        Mass QR Generator</p>
 
       <div style={{ textAlign: 'center', display: 'flex', columnGap: '20px', alignItems: 'center', justifyContent: 'center' }}>
         <label className="label1" style={{ fontSize: '15px', margin: "0" }}>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import { Link, useParams } from "react-router-dom";
 
 import call from "./images/call.webp";
@@ -13,17 +12,31 @@ import history from "./images/history.png";
 import update from "./images/update.png";
 import logo from './images/logo.png'
 import flanzer1 from './images/flanzer1.png'
+import police from './images/police.png'
 
 import Footer from "./components/Footer";
 import Footer2 from "./components/Footer2";
 import ConfirmationModal from "./components/ConfirmationModal";
 
-
 function QRCodeScanner() {
   const [userDetails, setUserDetails] = useState(null);
   const [error, setError] = useState(null);
   const [showInfoPrompt, setShowInfoPrompt] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const { uniqueNumber } = useParams();
+  const [infoData, setInfoData] = useState({
+    personName: "",
+    gender: "",
+    bloodGroup: "",
+    phoneNumber: "",
+    emergencyNumber: "",
+    address: "",
+    profileImage: "",
+    disease: "",
+    allergies: "",
+    regularHospital: "",
+    doctor: "",
+  });
 
   const fetchUserDetails = async () => {
     try {
@@ -51,7 +64,13 @@ function QRCodeScanner() {
     fetchUserDetails();
   }, [uniqueNumber]);
 
-  const handleInfoSubmit = async (infoData) => {
+  const handleInfoSubmit = async (e) => {
+    setInfoData(e)
+    console.log(infoData)
+    setShowConfirmationModal(true);
+  };
+
+  const handleSubmit = async () => {
     try {
       // Send request to backend
       await axios.post("https://driver-qr.vercel.app/update-details", {
@@ -59,7 +78,8 @@ function QRCodeScanner() {
         userDetails: infoData,
       });
       console.log("User details saved successfully:");
-      setShowInfoPrompt(true);
+      setShowConfirmationModal(false);
+      window.location.reload();
       await fetchUserDetails();
       // Handle success message or redirect to another page
     } catch (error) {
@@ -208,16 +228,19 @@ function QRCodeScanner() {
                     alt="ambulance"
                   />
                 </a>
-                <img
-                  style={{
-                    height: "70px",
-                    width: "70px",
-                    objectFit: "cover",
-                    paddingLeft: "5px",
-                  }}
-                  src={conversation}
-                  alt="conversation"
-                />
+                <a href="tel:100">
+                  <img
+                    style={{
+                      height: "60px",
+                      width: "60px",
+                      objectFit: "cover",
+                      borderRadius:'50%',
+                      paddingLeft: "10px",
+                    }}
+                    src={police}
+                    alt="conversation"
+                  />
+                </a>
               </div>
 
               <div>
@@ -276,12 +299,12 @@ function QRCodeScanner() {
                     letterSpacing: "1px",
                   }}
                 >
-                  <p>Disease: {userDetails.disease === "" ? "Nil" : userDetails.bloodGroup}</p>
-                  <p>Allegries: {userDetails.disease === "" ? "Nil" : userDetails.allergies}</p>
+                  <p><b>Disease:</b> {userDetails.disease === "" ? "Nil" : userDetails.bloodGroup}</p>
+                  <p><b>Allegries:</b> {userDetails.disease === "" ? "Nil" : userDetails.allergies}</p>
                   <p style={{ marginTop: "20px" }}>
-                    Regular hospital: {userDetails.disease === "" ? "Nil" : userDetails.regularHospital}
+                    <b>Regular hospital:</b> {userDetails.disease === "" ? "Nil" : userDetails.regularHospital}
                   </p>
-                  <p>Doctor: {userDetails.disease === "" ? "Nil" : userDetails.doctor}</p>
+                  <p><b>Doctor:</b> {userDetails.disease === "" ? "Nil" : userDetails.doctor}</p>
                 </div>
               </div>
 
@@ -309,13 +332,18 @@ function QRCodeScanner() {
         </div>
       )}
       {showInfoPrompt && <InfoPrompt onSubmit={handleInfoSubmit} />}
-
+      {showConfirmationModal && 
+        <ConfirmationModal
+          infoData={infoData}
+          onClose={() => setShowConfirmationModal(false)}
+          onSubmit={handleSubmit}
+        />
+      }
       <Footer2 />
     </div>
   );
 }
 
-// InfoPrompt component
 function InfoPrompt({ onSubmit }) {
   const [infoData, setInfoData] = useState({
     personName: "",
@@ -344,8 +372,6 @@ function InfoPrompt({ onSubmit }) {
     onSubmit(infoData);
   };
 
-  
-
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -372,7 +398,6 @@ function InfoPrompt({ onSubmit }) {
           display: "flex",
           flexDirection: "column",
           rowGap: "30px",
-          padding: "20px",
         }}
       >
         <p className="head" style={{
@@ -429,186 +454,238 @@ function InfoPrompt({ onSubmit }) {
             </ul>
           </div>
         </div>
-
-        {/* <button className="buttons">Input your details</button> */}
-      </div>
-
-      {/* input section user */}
-      <div className="container">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "20px",
-          }}
-        >
-          <hr style={{ flex: 1, marginRight: "10px" }} />
-          <p style={{ color: "gray" }}>Personal Details</p>
-          <hr style={{ flex: 1, marginLeft: "10px" }} />
-        </div>
-        <form style={{ marginTop: "5px" }} onSubmit={handleSubmit}>
-          <label className="label" htmlFor="Name">
-            Upload image as .png<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
-          </label>
-          <input
-            style={{ marginBottom: "25px" }}
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-
-          {selectedImage && (
-            <img
-              style={{ width: "100px", height: "100px", marginTop: "10px" }}
-              src={URL.createObjectURL(selectedImage)}
-              alt="Selected Image"
-            />
-          )}
-          <label className="label" htmlFor="Name">
-            Name<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
-          </label>
-          <input
-            className="input-field"
-            type="text"
-            placeholder="Name..."
-            name="personName"
-            value={infoData.personName}
-            onChange={handleInputChange}
-          />
-          <label className="label" htmlFor="gender">
-            Gender<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
-          </label>
-          <select
-            className="select-field"
-            name="gender"
-            value={infoData.gender}
-            onChange={handleInputChange}
-          >
-            <option value="" disabled>
-              --Select gender--
-            </option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select>
-          <label className="label" htmlFor="Primary">
-            Contact No<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
-          </label>
-          <input
-            className="input-field"
-            type="number"
-            placeholder="Primary No..."
-            step="0.01"
-            name="phoneNumber"
-            value={infoData.phoneNumber}
-            onChange={handleInputChange}
-          />
-          <label className="label" htmlFor="Secondary">
-            Emergency contact<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
-          </label>
-          <input
-            className="input-field"
-            type="number"
-            placeholder="Emergency contact..."
-            step="0.01"
-            name="emergencyNumber"
-            value={infoData.emergencyNumber}
-            onChange={handleInputChange}
-          />
-          <label className="label" htmlFor="group">
-            Blood Group<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
-          </label>
-          <select
-            className="select-field"
-            name="bloodGroup"
-            value={infoData.bloodGroup}
-            onChange={handleInputChange}
-          >
-            <option value="" disabled>
-              --Select Blood group--
-            </option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-          </select>
-          <label className="label" htmlFor="address">
-            Address:
-          </label>
-          <textarea
-            className="textarea-field"
-            name="address"
-            value={infoData.address}
-            onChange={handleInputChange}
-          />
-
-          {/* medical details */}
+        <div className="container" style={{width:'100%',padding:'0'}}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: "10px",
-              marginTop: "30px",
+              marginBottom: "20px",
             }}
           >
             <hr style={{ flex: 1, marginRight: "10px" }} />
-            <p style={{ color: "gray" }}>Medical Details</p>
+            <p style={{ color: "gray" }}>Personal Details</p>
             <hr style={{ flex: 1, marginLeft: "10px" }} />
           </div>
+          <form>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "center",
+                margin:'50px 0'
+              }}
+            >
+              <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleImageChange}
+                required
+              />
+              <label
+                htmlFor="imageInput"
+                style={{
+                  backgroundColor: "#E42A3C",
+                  color: "white",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                <img src={update} alt="update" style={{ width: "20px", height: "20px" }} /> Update Profile Picture  <span style={{fontWeight:'400',fontSize:'15px'}}>*</span>
+              </label>
+              {infoData.profileImage && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <img
+                    src={infoData.profileImage}
+                    alt="profile"
+                    style={{ width: "100px", height: "100px", borderRadius: "50px" }}
+                  />
+                </div>
+              )}
+            </div>
 
-          <div>
-            <label className="label" htmlFor="disease">
-              Disease<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
+            <label className="label" htmlFor="Name">
+              Full Name<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
             </label>
-            <textarea
-              className="textarea-field"
-              name="disease"
-              value={infoData.disease}
+            <input
+              className="input-field"
+              type="text"
+              placeholder="Name..."
+              name="personName"
+              value={infoData.personName}
               onChange={handleInputChange}
+              required
             />
-            <label className="label" htmlFor="allegry">
-              Allegries<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
-            </label>
-            <textarea
-              className="textarea-field"
-              name="allergies"
-              value={infoData.allergies}
-              onChange={handleInputChange}
-            />
-            <label className="label" htmlFor="hospital">
-              Regular Hospital<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
-            </label>
-            <textarea
-              className="textarea-field"
-              name="regularHospital"
-              value={infoData.regularHospital}
-              onChange={handleInputChange}
-            />
-            <label className="label" htmlFor="doctor">
-              Doctor<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
-            </label>
-            <textarea
-              className="textarea-field"
-              name="doctor"
-              value={infoData.doctor}
-              onChange={handleInputChange}
-            />
-          </div>
 
-          <button className="button" type="submit">
-            Submit
-          </button>
-        </form>
+            <label className="label" htmlFor="gender">
+            Gender<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
+            </label>
+            <select
+              className="select-field"
+              name="gender"
+              value={infoData.gender}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="" disabled>
+                --Select gender--
+              </option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+
+            <label className="label" htmlFor="Primary">
+            Contact No<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
+            </label>
+            <input
+              className="input-field"
+              type="number"
+              placeholder="Primary No..."
+              name="phoneNumber"
+              required
+              value={infoData.phoneNumber}
+              onChange={handleInputChange}
+            />
+
+            <label className="label" htmlFor="Secondary">
+              Emergency contact<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
+            </label>
+            <input
+              className="input-field"
+              type="number"
+              placeholder="Emergency contact..."
+              required
+              name="emergencyNumber"
+              value={infoData.emergencyNumber}
+              onChange={handleInputChange}
+            />
+
+            <label className="label" htmlFor="group">
+              Blood Group<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
+            </label>
+            <select
+              className="select-field"
+              name="bloodGroup"
+              required
+              value={infoData.bloodGroup}
+              onChange={handleInputChange}
+            >
+              <option value="" disabled>
+                --Select Blood group--
+              </option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+
+            <label className="label" htmlFor="address">
+              Address:
+            </label>
+            <textarea
+              className="textarea-field"
+              name="address"
+              value={infoData.address}
+              required
+              onChange={handleInputChange}
+            />
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "10px",
+                marginTop: "30px",
+              }}
+            >
+              <hr style={{ flex: 1, marginRight: "10px" }} />
+              <p style={{ color: "gray" }}>Medical Details</p>
+              <hr style={{ flex: 1, marginLeft: "10px" }} />
+            </div>
+
+            <div>
+              <label className="label" htmlFor="disease">
+                Disease<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
+              </label>
+              <textarea
+                className="textarea-field"
+                name="disease"
+                value={infoData.disease}
+                onChange={handleInputChange}
+              />
+              <label className="label" htmlFor="allegry">
+                Allegries<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
+              </label>
+              <textarea
+                className="textarea-field"
+                name="allergies"
+                value={infoData.allergies}
+                onChange={handleInputChange}
+              />
+              <label className="label" htmlFor="hospital">
+                Regular Hospital<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
+              </label>
+              <textarea
+                className="textarea-field"
+                name="regularHospital"
+                value={infoData.regularHospital}
+                onChange={handleInputChange}
+              />
+              <label className="label" htmlFor="doctor">
+                Doctor<span style={{color:'green',fontWeight:'400',fontSize:'10px'}}>optional</span>
+              </label>
+              <textarea
+                className="textarea-field"
+                name="doctor"
+                value={infoData.doctor}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div
+              style={{
+                textAlign: "center",
+                margin: "20px 0",
+              }}
+            >
+              <button
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: "#16B40A",
+                  border: "none",
+                  color: "white",
+                  height: "40px",
+                  width: "200px",
+                  borderRadius: "8px",
+                  marginTop: "20px",
+                  cursor: "pointer",
+                }}
+              >
+                Save
+              </button>
+            </div>
+
+          </form>
+        </div>
       </div>
     </div>
   );
 }
-
-
 
 export default QRCodeScanner;

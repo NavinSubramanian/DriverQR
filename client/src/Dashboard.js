@@ -25,6 +25,8 @@ import {
 } from '@mui/x-data-grid-generator';
 
 import { Container } from '@mui/material';
+import Footer from './components/Footer';
+import { Link } from 'react-router-dom';
 
 
 const roles = ['Market', 'Finance', 'Development'];
@@ -219,51 +221,58 @@ export default function FullFeaturedCrudGrid() {
             onClick={handleEditClick(id)}
             color="inherit"
           />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-          />,
+          // <GridActionsCellItem
+          //   icon={<DeleteIcon />}
+          //   label="Delete"
+          //   onClick={handleDeleteClick(id)}
+          //   color="inherit"
+          // />,
         ];
       },
     },
   ];
 
   return (
-    <Container>
-      <Box
-        sx={{
-          height: 500,
-          width: '100%',
-          '& .actions': {
-            color: 'text.secondary',
-          },
-          '& .textPrimary': {
-            color: 'text.primary',
-          },
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          editMode="row"
-          rowModesModel={rowModesModel}
-          onRowModesModelChange={handleRowModesModelChange}
-          onRowEditStop={handleRowEditStop}
-          processRowUpdate={processRowUpdate}
-          slots={{
-            toolbar: GridToolbar,
-          }}
-          slotProps={{
-            toolbar: {
-              setRows,
-              setRowModesModel,
-              showQuickFilter: true,
+    <>
+      <nav style={{padding:'20px',backgroundColor:'black'}}>
+        <Link to="/" style={{color:'black',textDecoration:'none'}}><button style={{padding:'7px 18px',backgroundColor:'#FFDD00',border:'none',borderRadius:'5px',cursor:'pointer'}}>Back</button></Link>
+      </nav>
+      <div style={{marginBottom:'50px',padding:'20px'}}>
+        <Box
+          sx={{
+            height: 700,
+            width: '100%',
+            '& .actions': {
+              color: 'text.secondary',
+            },
+            '& .textPrimary': {
+              color: 'text.primary',
             },
           }}
-        />
-      </Box>
-    </Container>
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            editMode="row"
+            rowModesModel={rowModesModel}
+            onRowModesModelChange={handleRowModesModelChange}
+            onRowEditStop={handleRowEditStop}
+            processRowUpdate={processRowUpdate}
+            slots={{
+              toolbar: GridToolbar,
+            }}
+            slotProps={{
+              toolbar: {
+                setRows,
+                setRowModesModel,
+                showQuickFilter: true,
+              },
+            }}
+          />
+        </Box>
+      </div>
+
+      <Footer />
+    </>
   );
 }

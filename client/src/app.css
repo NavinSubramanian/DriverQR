@@ -579,6 +579,12 @@
 
 
 
+@media screen and (max-width:450px) {
+  .newFooter{
+    padding: 10px;
+    max-width: 100%;
+  }
+}
 
 
 

@@ -6,10 +6,8 @@ import { Link } from 'react-router-dom'
 
 const Footer2 = () => {
     return (
-        <div style={{boxShadow: "0 0 10px rgba(255, 255, 0, 0.9)",overflow:'hidden','@media (maxWidth:450px)':{
-            marginLeft:'20px'
-        }}}>
-            <div className="footerSection" >
+        <div style={{boxShadow: "0 0 10px rgba(255, 255, 0, 0.9)",overflow:'hidden'}} >
+            <div className="footerSection newFooter" >
                 <div className="footerRight">
                     <h3 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Contact Us,</h3>
                     <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Address: 360, 640, Anna Salai, Thousand Lights West, Thousand Lights, Chennai, Tamil Nadu 600006</h4>
