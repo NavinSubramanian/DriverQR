@@ -10,9 +10,10 @@ import card from "./images/card.png";
 import download from "./images/download.png";
 import history from "./images/history.png";
 import update from "./images/update.png";
-import logo from './images/logo.png'
+import logo from './images/logo2.png'
 import flanzer1 from './images/flanzer1.png'
-import police from './images/police.png'
+import siren from './images/siren.png'
+import gif from './images/loading.gif'
 
 import Footer from "./components/Footer";
 import Footer2 from "./components/Footer2";
@@ -37,6 +38,11 @@ function QRCodeScanner() {
     regularHospital: "",
     doctor: "",
   });
+
+  setTimeout(()=>{
+    const gif = document.getElementById('loading-gif')
+    gif.style.display = 'none'
+  },1000)
 
   const fetchUserDetails = async () => {
     try {
@@ -64,10 +70,14 @@ function QRCodeScanner() {
     fetchUserDetails();
   }, [uniqueNumber]);
 
+
   const handleInfoSubmit = async (e) => {
     setInfoData(e)
     console.log(infoData)
     setShowConfirmationModal(true);
+    setTimeout(()=>{
+      window.scrollTo(0, 2180);
+    },500)
   };
 
   const handleSubmit = async () => {
@@ -129,17 +139,21 @@ function QRCodeScanner() {
 
   return (
     <div style={{ overflow: "hidden",minHeight:'100vh' }}>
-      <nav className="navbar" style={{ backgroundColor: 'black', padding: '8px',display:'flex', alignItems:'center', justifyContent:'center',position:'sticky',top:'0',flexDirection:'column',boxShadow: "0 0 10px rgba(255, 255, 0, 0.9)", }}>
-        <div className="left-section">
-          <img className='logo' src={logo} alt='logo' style={{ height: '80px', width: '80px' }} />
-        </div>
-        <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
-            <span className="powered-by">
-              <Link style={{ color: 'white', textDecoration: 'none', fontSize: '15px' }} target="_blank" to='https://www.theflanzer.com/'>
-                supported by</Link></span>
-            <img style={{ height: '18px', paddingLeft: '5px', }} src={flanzer1} alt='flanzer1' />
+      <nav className="navbar" style={{ backgroundColor: 'black', padding: '6px',display:'flex', alignItems:'center',zIndex:'100', justifyContent:'center',position:'sticky',top:'0',flexDirection:'column',boxShadow: "0 0 10px rgba(255, 255, 0, 0.9)", }}>
+          <div className="left-section">
+          <img className='logo' src={logo} alt='logo' style={{ height: '60px', width: '130px' }} />
+          </div>
+          <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
+              <span className="powered-by">
+              <Link style={{ color: 'white', textDecoration: 'none', fontSize: '11px' }} target="_blank" to='https://www.theflanzer.com/'>
+                  supported by</Link></span>
+              <img style={{ height: '20px', paddingLeft: '5px',position:'relative',top:'6px' }} src={flanzer1} alt='flanzer1' />
           </div>
       </nav>
+
+      <div style={{display:'flex',alignItems:'center',justifyContent:'center',margin:'200px 0'}} id="loading-gif">
+        <img src={gif}  style={{width:'50px',height:'50px'}} />
+      </div>
 
       {error && <p>{error}</p>}
       {userDetails && (
@@ -199,15 +213,15 @@ function QRCodeScanner() {
                     letterSpacing: "1px",
                   }}
                 >
-                  Quick Links
+                  Quick Calls
                 </p>
 
               <div style={{ marginTop: "15px" }}>
-                <a href="tel:7904262162">
+                <a href="tel:112">
                   <img
                     style={{
-                      height: "70px",
-                      width: "70px",
+                      height: "50px",
+                      width: "50px",
                       objectFit: "cover",
                       paddingRight: "5px",
                     }}
@@ -218,8 +232,8 @@ function QRCodeScanner() {
                 <a href="tel:102">
                   <img
                     style={{
-                      height: "70px",
-                      width: "70px",
+                      height: "50px",
+                      width: "50px",
                       objectFit: "cover",
                       paddingRight: "5px",
                       paddingLeft: "5px",
@@ -231,13 +245,13 @@ function QRCodeScanner() {
                 <a href="tel:100">
                   <img
                     style={{
-                      height: "60px",
-                      width: "60px",
+                      height: "50px",
+                      width: "50px",
                       objectFit: "cover",
                       borderRadius:'50%',
-                      paddingLeft: "10px",
+                      paddingLeft: "5px",
                     }}
-                    src={police}
+                    src={siren}
                     alt="conversation"
                   />
                 </a>
@@ -325,7 +339,7 @@ function QRCodeScanner() {
                 Download This Page
               </button>
 
-              <p style={{margin:'20px auto',color:'white',fontSize:'10px'}}><i>*For any changes contact RayyanScans</i></p>
+              <p style={{margin:'20px auto',color:'white',fontSize:'10px'}}><i>*For any changes contact Rayyanscan</i></p>
 
             </form>
           </div>
@@ -392,7 +406,7 @@ function InfoPrompt({ onSubmit }) {
   };
 
   return (
-    <div>
+    <div style={{padding:'15px'}}>
       <div
         style={{
           display: "flex",
@@ -406,12 +420,12 @@ function InfoPrompt({ onSubmit }) {
             fontSize: "15pxpx"
           }
         }}>
-          Welcome to RayyanScanhub!,
+          Welcome to <b>RayyanScanhub!</b>
         </p>
 
         <div id="details-container">
-          <p className="head1" style={{ fontSize: "25px", height: "65px" }}>
-            We couldn't find your data. Please do read through instructions and
+          <p className="head1">
+          <span style={{color:'#E42A3C',fontWeight:'400',fontSize:'23px'}}>*</span>Please do read through instructions and
             fill in the form below to ensure your information is securely
             stored.{" "}
           </p>
@@ -431,25 +445,16 @@ function InfoPrompt({ onSubmit }) {
           >
             <ul>
               <li style={{ marginBottom: "10px" }}>
-                Your details shape your safety net. Fill the columns
-                accurately—this one-time entry ensures precision. For any
-                adjustments, the shop or the provided contact awaits your
-                request.
+                Fill in your details accurately for safety. Make sure they're correct for future reference.
               </li>
               <li style={{ marginBottom: "10px" }}>
-                Be proactive in emergencies. Fill out all columns for thorough
-                details. Your information is crucial for swift assistance in
-                case of lost items or emergencies.
+                Complete all fields for emergencies. Quick help depends on your information.
               </li>
               <li style={{ marginBottom: "10px" }}>
-                Empower your safety plan. Complete all fields for robust
-                details. In case of QR loss or damage, our shop is your go-to
-                for replacements or restoration.
+                Fill out every section for a strong safety plan. If you lose your QR, we can help.
               </li>
               <li style={{ marginBottom: "10px" }}>
-                Precision matters. Provide comprehensive details in one go. For
-                any necessary tweaks, the shop or the contact person listed
-                below is ready to assist.
+                Give detailed information at once. Contact us for any changes needed.
               </li>
             </ul>
           </div>
@@ -468,13 +473,16 @@ function InfoPrompt({ onSubmit }) {
             <hr style={{ flex: 1, marginLeft: "10px" }} />
           </div>
           <form>
+            <label className="label" htmlFor="Name">
+              Profile Picture<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
+            </label>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
                 justifyContent: "center",
-                margin:'50px 0'
+                margin:'15px 0'
               }}
             >
               <input
@@ -490,12 +498,16 @@ function InfoPrompt({ onSubmit }) {
                 style={{
                   backgroundColor: "#E42A3C",
                   color: "white",
-                  padding: "10px",
+                  padding: "6px",
                   borderRadius: "10px",
                   cursor: "pointer",
+                  fontSize:'13px',
+                  display:'flex',
+                  columnGap:'10px'
                 }}
               >
-                <img src={update} alt="update" style={{ width: "20px", height: "20px" }} /> Update Profile Picture  <span style={{fontWeight:'400',fontSize:'15px'}}>*</span>
+                <img src={update} alt="update" style={{ width: "20px", height: "20px",margin:'auto 0' }} /> 
+                Update Profile Picture 
               </label>
               {infoData.profileImage && (
                 <div
@@ -521,7 +533,7 @@ function InfoPrompt({ onSubmit }) {
             <input
               className="input-field"
               type="text"
-              placeholder="Name..."
+              placeholder="Name"
               name="personName"
               value={infoData.personName}
               onChange={handleInputChange}
@@ -551,7 +563,7 @@ function InfoPrompt({ onSubmit }) {
             <input
               className="input-field"
               type="number"
-              placeholder="Primary No..."
+              placeholder="Primary No"
               name="phoneNumber"
               required
               value={infoData.phoneNumber}
@@ -564,7 +576,7 @@ function InfoPrompt({ onSubmit }) {
             <input
               className="input-field"
               type="number"
-              placeholder="Emergency contact..."
+              placeholder="Emergency contact"
               required
               name="emergencyNumber"
               value={infoData.emergencyNumber}

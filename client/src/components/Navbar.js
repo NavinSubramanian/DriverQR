@@ -1,7 +1,7 @@
 import React from 'react';
 import '../app.css'
 import { Link,useNavigate } from 'react-router-dom'
-import logo from '../images/logo.png'
+import logo from '../images/logo2.png'
 import flanzer1 from '../images/flanzer1.png'
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
         <nav className="navbar" style={{backgroundColor:'black',padding:'8px'}}>
 
             <div className="left-section">
-                <img className='logo' src={logo} alt='logo' style={{height:'80px',width:'90px',marginLeft:'20px'}} />
+                <img className='logo' src={logo} alt='logo' style={{height:'60px',width:'130px',marginLeft:'20px'}} />
             </div>
 
             <div>

@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 
 import { Link } from 'react-router-dom'
 
-
+import dashboard from './images/dashboard.png'
 
 const Landingpage = () => {
     return (
@@ -13,11 +13,11 @@ const Landingpage = () => {
             <Navbar/>
             <div>
                 <p className='head' style={{ fontSize: '25px', marginTop: '30px', marginLeft: '100px' }}>
-                    Welcome to Scanhubgen!,</p>
+                    Welcome to Rayyanscan!,</p>
             </div>
             <div>
                 <p style={{ marginTop: '20px', fontWeight: '400', fontSize: '20px', marginLeft: '150px', lineHeight: '30px', maxWidth: '1300px' }}>
-                    Scanhubgen, seamlessly <b>generate and affix QR code</b> embedding your crucial contact particulars at your discretion.
+                    Rayyanscan, seamlessly <b>generate and affix QR code</b> embedding your crucial contact particulars at your discretion.
                     In situations of lost belongings or emergencies, individuals can effortlessly scan the QR code, expeditiously accessing
                     the requisite information and establishing a prompt and effective connection with the designated owner.
                     Elevate security and convenience through our sophisticated, user-centric platform, guaranteeing the safeguarding of
@@ -50,8 +50,8 @@ const Landingpage = () => {
                     </button>
                 </div>
 
-                <div className="flex-item">
-                    <img className="item1" src='https://s39613.pcdn.co/wp-content/uploads/2023/07/hand-holding-and-touching-smartphone-screen-with-thumb-scan-qr-code-vector-illustration_s1024x1024wisk20c60ak_N87cngM8pJ6hVHVh6NAmiFfMW_OJLL8csVewzc.jpg' />
+                <div className="flex-item" style={{}}>
+                    <img className="item1" src={dashboard} style={{height:'150px',width:'175px',margin:'0 auto'}} />
                     <h1 class="item-body">Dashboard</h1>
                     <p class="item-stat">Swiftly access all the user details, upto date and edit the details when needed for the changes.</p>
                     <button className='button2'> <Link to='/dashboard' style={{ color: 'white', textDecoration: 'none' }}>Enter</Link> </button>

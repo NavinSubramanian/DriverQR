@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../images/logo.png'
+import logo from '../images/logo2.png'
 import '../app.css'
 import { Link } from 'react-router-dom'
 
@@ -10,8 +10,8 @@ const Footer = () => {
             <div className="footerSection">
                 <div className="footerTop">
                     <div className="footerLeft">
-                        <img style={{height:'100px',}} src={logo} alt='logo' />
-                        <p style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Meet Rayyanscans - a product from theflanzer.com 
+                        <img style={{height:'60px',width:'130px'}} src={logo} alt='logo' />
+                        <p style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Meet Rayyanscan - a product from theflanzer.com 
                         <br/>Generate discreet QR codes with essential contact details for emergency access. Elevate security and
                          professionalism through our user-centric platform.</p>
                     </div>
