@@ -22,7 +22,7 @@ const ConfirmationModal = ({ infoData, onClose, onSubmit }) => {
         </div>
       </div>
       <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
-        <button onClick={onSubmit} style={{padding:'10px 25px',backgroundColor:'#E42A3C',color:'white',margin:'10px 0',border:'none',borderRadius:'8px'}}>Confirm</button>
+        <button id="btn" onClick={onSubmit} onTouchStart={onSubmit} style={{cursor:'pointer',padding:'10px 25px',backgroundColor:'#E42A3C',color:'white',margin:'10px 0',border:'none',borderRadius:'8px'}}>Confirm</button>
         <p><i style={{fontSize:'10px'}}><b>If any mistakes, make changes on the form above and save it.</b></i></p>
       </div>
     </div>
