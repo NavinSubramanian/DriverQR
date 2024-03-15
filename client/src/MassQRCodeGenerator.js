@@ -20,6 +20,7 @@ const MassQRCodeGenerator = () => {
           uniqueIdentifier: uniqueIdentifier,
           userDetails: {
             phoneNumber: '',
+            age:'',
             personName: '',
             emergencyNumber: '',
             gender: '',

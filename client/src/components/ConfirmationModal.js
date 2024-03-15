@@ -9,6 +9,7 @@ const ConfirmationModal = ({ infoData, onClose, onSubmit }) => {
         <hr style={{margin:'10px 0'}} />
         <div>
           <p><b style={{}}>Name:</b> {infoData.personName}</p>
+          <p><b style={{}}>Age:</b> {infoData.age}</p>
           <p><b style={{}}>Gender:</b> {infoData.gender}</p>
           <p><b style={{}}>Blood Group:</b> {infoData.bloodGroup}</p>
           <p><b style={{}}>Phone Number:</b> {infoData.phoneNumber}</p>

@@ -121,6 +121,12 @@ export default function FullFeaturedCrudGrid() {
       editable: true,
     },
     {
+      field: 'age',
+      headerName: 'Age',
+      width: 80,
+      editable: true,
+    },
+    {
       field: 'gender',
       headerName: 'Gender',
       width: 80,
@@ -235,7 +241,7 @@ export default function FullFeaturedCrudGrid() {
   return (
     <>
       <nav style={{padding:'20px',backgroundColor:'black'}}>
-        <Link to="/" style={{color:'black',textDecoration:'none'}}><button style={{padding:'7px 18px',backgroundColor:'#FFDD00',border:'none',borderRadius:'5px',cursor:'pointer'}}>Back</button></Link>
+        <Link to="/" style={{color:'black',textDecoration:'none'}}><button style={{padding:'7px 18px',fontWeight:'500',backgroundColor:'#FFDD00',border:'none',borderRadius:'5px',cursor:'pointer'}}>Back</button></Link>
       </nav>
       <div style={{marginBottom:'50px',padding:'20px'}}>
         <Box

@@ -27,6 +27,7 @@ function QRCodeScanner() {
   const { uniqueNumber } = useParams();
   const [infoData, setInfoData] = useState({
     personName: "",
+    age:"",
     gender: "",
     bloodGroup: "",
     phoneNumber: "",
@@ -283,6 +284,7 @@ function QRCodeScanner() {
                   }}
                 >
                   <p><b>Gender:</b> {userDetails.gender}</p>
+                  <p><b>Age:</b> {userDetails.age}</p>
                   <p><b>Contact no:</b> {userDetails.phoneNumber}</p>
                   <p><b>Emergency contact:</b> {userDetails.emergencyNumber}</p>
                   <p><b>Address:</b> {userDetails.address}</p>
@@ -362,6 +364,7 @@ function InfoPrompt({ onSubmit }) {
   const [infoData, setInfoData] = useState({
     personName: "",
     gender: "",
+    age:"",
     bloodGroup: "",
     phoneNumber: "",
     emergencyNumber: "",
@@ -536,6 +539,19 @@ function InfoPrompt({ onSubmit }) {
               placeholder="Name"
               name="personName"
               value={infoData.personName}
+              onChange={handleInputChange}
+              required
+            />
+
+            <label className="label" htmlFor="Age">
+              Age<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
+            </label>
+            <input
+              className="input-field"
+              type="number"
+              placeholder="Age"
+              name="age"
+              value={infoData.age}
               onChange={handleInputChange}
               required
             />
