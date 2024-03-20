@@ -604,3 +604,42 @@ html{
 
 
 /* Temp */
+
+/* .qr-code.active{
+  position: relative;
+}
+
+.qr-code{
+  position: relative;
+}
+
+.qr-code::before{
+  content: "";
+  height: 7px;
+  position: absolute;
+  width: 1px;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  background-color: white;
+}
+
+.qr-code.active::after{
+  content: "";
+  height: 1px;
+  position: absolute;
+  width: 7px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+}
+.qr-code.active::before{
+  content: "";
+  height: 7px;
+  position: absolute;
+  width: 1px;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  background-color: white;
+} */
