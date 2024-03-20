@@ -33,6 +33,7 @@ const MassQRCodeGenerator = () => {
             doctor: '',
           }
         });
+        
         codes.push({ uniqueIdentifier: uniqueIdentifier, qrCodeData: response.data.qrCodeData });
       }
       setGeneratedCodes(codes);

@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const QRCode = require('qrcode');
 const User = require('./models/User');
 const cors = require('cors');
-const { createCanvas } = require('canvas');
 const stream = require('stream');
+const { createCanvas, loadImage } = require('canvas');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,29 +24,19 @@ const db = mongoose.connection;
 db.once('open', () => console.log('Connected to MongoDB'));
 
 // Routes
+
 app.post('/generate-qrcode', async (req, res) => {
   try {
-    // Generate QR Code
+    // Generate QR Code with custom color and transparent background
     const websiteUrl = 'https://www.rayyanscan.co.in/user-details/';
     const uniqueIdentifier = req.body.uniqueIdentifier;
-    const qrCodeOptions = {
-      color: {
-        dark: '#ffdd00', // Yellow color
-        light: '#0000', // Transparent background
-      },
-    };
-    const qrCodeData = await QRCode.toCanvas(createCanvas, websiteUrl + uniqueIdentifier, qrCodeOptions);
-    
-    // Convert canvas to data URL
-    const canvasStream = qrCodeData.png();
-    const buffer = await streamToBuffer(canvasStream);
-    const qrCodeDataURL = `data:image/png;base64,${buffer.toString('base64')}`;
+    const qrCodeData = await generateQRCode(websiteUrl + uniqueIdentifier);
 
     // Save User and QR Code to Database
     const newUser = new User({
       uniqueIdentifier: req.body.uniqueIdentifier,
       userDetails: req.body.userDetails,
-      qrCodeData: qrCodeDataURL,
+      qrCodeData: qrCodeData,
     });
     await newUser.save();
 
@@ -54,7 +45,23 @@ app.post('/generate-qrcode', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Error generating QR Code' });
   }
-}); 
+});
+
+async function generateQRCode(data) {
+  const canvas = createCanvas(200, 200);
+  const context = canvas.getContext('2d');
+
+  // Generate QR Code
+  await QRCode.toCanvas(canvas, data, { color: { dark: '#ffdd00' }, errorCorrectionLevel: 'H' });
+
+  // Make background transparent
+  context.globalAlpha = 0; // Set transparency
+  context.fillRect(0, 0, canvas.width, canvas.height); // Fill with transparent color
+
+  // Convert canvas to base64 data URL
+  const qrCodeDataURL = canvas.toDataURL('image/png');
+  return qrCodeDataURL;
+}
 
 
 app.post('/scan-qrcode', async (req, res) => {
