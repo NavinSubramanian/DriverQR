@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const QRCode = require('qrcode');
 const User = require('./models/User');
 const cors = require('cors');
+const { createCanvas } = require('canvas');
+const stream = require('stream');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,13 +28,24 @@ app.post('/generate-qrcode', async (req, res) => {
     // Generate QR Code
     const websiteUrl = 'https://www.rayyanscan.co.in/user-details/';
     const uniqueIdentifier = req.body.uniqueIdentifier;
-    const qrCodeData = await QRCode.toDataURL(websiteUrl + uniqueIdentifier);
+    const qrCodeOptions = {
+      color: {
+        dark: '#ffdd00', // Yellow color
+        light: '#0000', // Transparent background
+      },
+    };
+    const qrCodeData = await QRCode.toCanvas(createCanvas, websiteUrl + uniqueIdentifier, qrCodeOptions);
+    
+    // Convert canvas to data URL
+    const canvasStream = qrCodeData.png();
+    const buffer = await streamToBuffer(canvasStream);
+    const qrCodeDataURL = `data:image/png;base64,${buffer.toString('base64')}`;
 
     // Save User and QR Code to Database
     const newUser = new User({
       uniqueIdentifier: req.body.uniqueIdentifier,
       userDetails: req.body.userDetails,
-      qrCodeData: qrCodeData,
+      qrCodeData: qrCodeDataURL,
     });
     await newUser.save();
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import logo from './images/logo.png'
+import logo from './images/logo2.png'
 import Flanzer from './images/flanzer.png'
 import './app.css'
 
@@ -164,27 +164,30 @@ const MassQRCodeGenerator = () => {
       <div id='codecontainer'>
         <div className="qr-code-container">
           {generatedCodes.map((code) => (
-            <div key={code.generatedCodes} className="qr-code" style={{ height: '75.59px', width: '187.08661417px' }}>
-              <div className="qr-code-content">
-                <div style={{
+            <div key={code.generatedCodes} className="qr-code" style={{backgroundColor:'black', height: '83.150px', width: '226.772px' }}>
+              <div className="qr-code-content" style={{height:'100%',width:'100%'}}>
+                <div style={{ 
                   display: 'flex', position: 'relative', height: '75.59px', width: '92.598px', alignItems: 'center',
                   justifyContent: 'center'
                 }}>
-                  <h6 className='float' style={{ fontSize: '5px', width: '100%', }}>SCAN FOR EMERGENCY/LOST</h6>
+                  <h6 className='float' style={{ fontSize: '5px', width: '100%',color:'#ffdd00' }}>SCAN FOR EMERGENCY/LOST</h6>
 
                   <div className='floatdiv'>
-                    <h6 style={{ fontWeight: '300', display: 'flex', justifyContent: 'space-between', fontSize: '3px', alignItems: 'center', textAlign: 'center' }}>powered by <span style={{ marginLeft: '2px', fontWeight: '500', fontSize: '4px' }}>
-                      <img src={Flanzer} style={{ height: '5px', width: '4.5px', position: 'relative', top: '1.2px', right: '1px' }}></img>
+                    <h6 style={{ fontWeight: '300', display: 'flex', justifyContent: 'space-between', fontSize: '3px', alignItems: 'center', textAlign: 'center',color:'#ffdd00' }}>powered by <span style={{ marginLeft: '2px', fontWeight: '500', fontSize: '4px' }}>
                       theflanzer.com
                     </span>
                     </h6>
                   </div>
                   <div className="tilted-wrapper">
-                    <p className="tilted-text">{code.uniqueIdentifier}</p>
+                    <p className="tilted-text" style={{color:'#ffdd00'}}>{code.uniqueIdentifier}</p>
                   </div>
-                  <img src={code.qrCodeData} style={{ height: '65px', width: '65px', }} alt={`QR Code for ${code.uniqueIdentifier}`} />
+                  <img src={code.qrCodeData} style={{ height: '65px', width: '65px',mixBlendMode:'multiply',backgroundColor:'white' }} alt={`QR Code for ${code.uniqueIdentifier}`} />
                 </div>
-                <img style={{ height: '76.724409449px', width: '92.598px' }} src={logo} alt='Logo' />
+                <div style={{position:'relative'}}>
+
+                  <img style={{ height: '70.724409449px', width: '142.598px' }} src={logo} alt='Logo' />
+                  <h6 style={{position:'absolute',color:'#ffdd00',fontSize:'5px',bottom:'2px',left:'35px'}}>@rayyan_progear_official</h6>
+                </div>
               </div>
             </div>
           ))}
