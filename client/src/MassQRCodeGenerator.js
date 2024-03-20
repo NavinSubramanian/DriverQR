@@ -182,7 +182,7 @@ const MassQRCodeGenerator = () => {
                   <div className="tilted-wrapper">
                     <p className="tilted-text" style={{color:'#ffdd00'}}>{code.uniqueIdentifier}</p>
                   </div>
-                  <img src={code.qrCodeData} style={{ height: '65px', width: '65px',mixBlendMode:'multiply',backgroundColor:'white' }} alt={`QR Code for ${code.uniqueIdentifier}`} />
+                  <img src={code.qrCodeData} style={{ height: '65px', width: '65px',backgroundColor:'white' }} alt={`QR Code for ${code.uniqueIdentifier}`} />
                 </div>
                 <div style={{position:'relative'}}>
 
