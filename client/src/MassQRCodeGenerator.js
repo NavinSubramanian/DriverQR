@@ -54,7 +54,6 @@ const MassQRCodeGenerator = () => {
   };
 
   const printQRCodeContainer = () => {
-
     const printableContent = document.getElementById('codecontainer').innerHTML;
     const printWindow = window.open('', '_blank');
 
@@ -76,7 +75,6 @@ const MassQRCodeGenerator = () => {
               .qr-code-container {
                 display: flex;
                 flex-wrap: wrap;  
-                margin-top: 30px;
               }
               
               .qr-code-row {
@@ -134,8 +132,25 @@ const MassQRCodeGenerator = () => {
           <body>${printableContent}</body>
         </html>
       `);
-      printWindow.document.close();
 
+  
+      // const qrCodes = generatedCodes.map((code, index) => ({
+      //   code,
+      //   batch: Math.floor(index / 100) + 1, // Batch number (starting from 1)
+      // }));
+      // const batches = Array.from(new Set(qrCodes.map((qr) => qr.batch))); // Get unique batch numbers
+  
+      // batches.forEach((batchNum) => {
+      //   const codesInBatch = qrCodes.filter((qr) => qr.batch === batchNum);
+      //   const codesHtml = codesInBatch.map((qr) => qr.code).join('');
+  
+      //   printWindow.document.write(`
+      //     <div class="qr-code-container">
+      //       ${codesHtml}
+      //     </div>
+      //   `);
+      //   printWindow.document.close();
+  
       printWindow.print();
     } else {
       alert('Please allow pop-ups for this site to enable printing.');
@@ -161,7 +176,7 @@ const MassQRCodeGenerator = () => {
       <label htmlFor="numberOfCodes">Number of QR Codes to Generate:</label>
       <input type="number" id="numberOfCodes" value={numberOfCodes} onChange={(e) => setNumberOfCodes(e.target.value)} />
       <button onClick={generateQRCode}>Generate QR Codes</button> */}
-      <div id='codecontainer'>
+      <div id='codecontainer' style={{}}>
         <div className="qr-code-container">
           {generatedCodes.map((code,index) => (
             <div key={code.generatedCodes} className="qr-code active" style={{backgroundColor:'black', height: '75.59', width: '220.772px' }}>
