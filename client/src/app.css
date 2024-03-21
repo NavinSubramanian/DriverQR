@@ -370,9 +370,9 @@ html{
     align-items: center;
   }
   
-  .qr-code img {
+  /* .qr-code img {
     margin-left: 1px;
-  }
+  } */
   
   
   .tilted-wrapper {
@@ -384,7 +384,6 @@ html{
     writing-mode: vertical-lr;
     text-orientation: upright;
     font-size: 4px;
-    margin-right: 2px;
     letter-spacing: 1px;
   }
   .float,.floatdiv{
@@ -394,7 +393,7 @@ html{
     font-size: 4px;
   }
   .float{
-    top: 1.4px;
+    top: 3px;
     left: 14px;
   }
   .floatdiv{
