@@ -11,7 +11,7 @@ const Footer = () => {
                 <div className="footerTop">
                     <div className="footerLeft">
                         <img style={{height:'60px',width:'130px'}} src={logo} alt='logo' />
-                        <p style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Meet Rayyanscan - a product from theflanzer.com 
+                        <p style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Meet Rayyanscan - 
                         <br/>Generate discreet QR codes with essential contact details for emergency access. Elevate security and
                          professionalism through our user-centric platform.</p>
                     </div>
@@ -22,7 +22,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="footerBottom">
-                    <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Copyright © 2024 Rayyanscan | <Link style={{color: '#ffdd00',textDecoration:'none'}}>Powered by Flanzer</Link></h4>
+                    <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Copyright © 2024 Rayyanscan </h4>
                 </div>
             </div>
         </div>

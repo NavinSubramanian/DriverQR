@@ -144,12 +144,12 @@ function QRCodeScanner() {
           <div className="left-section">
           <img className='logo' src={logo} alt='logo' style={{ height: '60px', width: '130px' }} />
           </div>
-          <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
+          {/* <div style={{ display: 'flex', marginLeft: '10px', display: 'inline-block' }}>
               <span className="powered-by">
               <Link style={{ color: 'white', textDecoration: 'none', fontSize: '11px' }} target="_blank" to='https://www.theflanzer.com/'>
                   supported by</Link></span>
               <img style={{ height: '20px', paddingLeft: '5px',position:'relative',top:'6px' }} src={flanzer1} alt='flanzer1' />
-          </div>
+          </div> */}
       </nav>
 
       <div style={{display:'flex',alignItems:'center',justifyContent:'center',margin:'200px 0'}} id="loading-gif">

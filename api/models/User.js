@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     regularHospital: String,
     doctor:String,
   },
+  expirationDate: {
+    type: Date,
+    required: true,
+  },
   qrCodeData: { type: String, required: true, unique: true }, 
 });
 

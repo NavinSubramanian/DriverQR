@@ -14,7 +14,7 @@ const Footer2 = () => {
                     <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Tel:  044 4864 1135 <br />Instagram: <Link style={{color: '#ffdd00'}} to='https://www.instagram.com/rayyan_progear_official/'>rayyan_progear_official</Link></h4>
                 </div>
                 <div className="footerBottom">
-                    <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Copyright © 2024 Rayyanscan | <Link style={{color: '#ffdd00',textDecoration:'none'}}>Powered by Flanzer</Link></h4>
+                    <h4 style={{fontSize: '14px',lineHeight: '22px',letterSpacing:'1px'}}>Copyright © 2024 Rayyanscan</h4>
                 </div>
             </div>
         </div>

@@ -28,11 +28,15 @@ app.post('/generate-qrcode', async (req, res) => {
     const uniqueIdentifier = req.body.uniqueIdentifier;
     const qrCodeData = await QRCode.toDataURL(websiteUrl + uniqueIdentifier);
 
+    const expirationDate = new Date();
+    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
     // Save User and QR Code to Database
     const newUser = new User({
       uniqueIdentifier: req.body.uniqueIdentifier,
       userDetails: req.body.userDetails,
       qrCodeData: qrCodeData,
+      expirationDate: expirationDate,
     });
     await newUser.save();
 
