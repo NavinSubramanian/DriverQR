@@ -52,14 +52,14 @@ function QRCodeScanner() {
         `https://driver-qr.vercel.app/user-details/${uniqueNumber}`
       );
       const user = response.data.user.userDetails;
-
+      
       var existsInDB = true;
       if (user.address === "") {
         existsInDB = false;
       }
       if (existsInDB) {
         setUserDetails(user);
-        const expirationDate = new Date(userDetails.expirationDate);
+        const expirationDate = new Date(response.data.user.expirationDate);
 
         const formattedExpirationDate = expirationDate.toLocaleDateString('en-US', {
           year: 'numeric',
@@ -67,7 +67,6 @@ function QRCodeScanner() {
           day: 'numeric',
         });
 
-        console.log(formattedExpirationDate)
         setExpDate(formattedExpirationDate)
 
         setError(null);
@@ -172,7 +171,6 @@ function QRCodeScanner() {
       {error && <p>{error}</p>}
       {userDetails && (
         <div id="printable-content" style={{ overflow: "hidden", backgroundColor:'black' }}>
-          <h1>Expire date : {expDate}</h1>
           <div
             className="showdetails"
             style={{
@@ -181,6 +179,7 @@ function QRCodeScanner() {
               backgroundColor: 'black',
             }}
           >
+            <h3 style={{color:'red',textAlign:'center'}}>Expire date : {expDate}</h3>
             <form>
               <div
                 style={{
