@@ -636,7 +636,7 @@ function InfoPrompt({ onSubmit }) {
             </select>
 
             <label className="label" htmlFor="address">
-              Address:
+              Address<span style={{color:'#E42A3C',fontWeight:'400',fontSize:'15px'}}>*</span>
             </label>
             <textarea
               className="textarea-field"

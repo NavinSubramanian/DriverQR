@@ -75,6 +75,8 @@ const MassQRCodeGenerator = () => {
               .qr-code-container {
                 display: flex;
                 flex-wrap: wrap;  
+                row-gap: 7.55px;
+                column-gap: 7.55px;
               }
               
               .qr-code-row {
@@ -179,16 +181,16 @@ const MassQRCodeGenerator = () => {
       <div id='codecontainer' style={{}}>
         <div className="qr-code-container">
           {generatedCodes.map((code,index) => (
-            <div key={code.generatedCodes} className="qr-code active" style={{backgroundColor:'black', height: '75.59', width: '220.772px' }}>
+            <div key={code.generatedCodes} className="qr-code active" style={{backgroundColor:'black', height: '73.18px', width: '216.052px' }}>
                 <div className="qr-code-content" style={{height:'100%',width:'100%'}}>
                 <div style={{ 
-                  display: 'flex', position: 'relative', height: '75.59px', width: '92.598px', alignItems: 'center',
+                  display: 'flex', position: 'relative', height: '76.18px', width: '92.598px', alignItems: 'center',
                   justifyContent: 'center'
                 }}>
                   <h6 className='float' style={{ zIndex:'100',fontSize: '5px', width: '100%',color:'#ffdd00' }}>SCAN FOR EMERGENCY/LOST</h6>
 
                   <div className='floatdiv'>
-                    <h6 style={{ fontWeight: '300',position:'relative',left:'6px', display: 'flex', justifyContent: 'space-between', fontSize: '3px', alignItems: 'center', textAlign: 'center',color:'#ffdd00' }}>powered by <span style={{ marginLeft: '2px', fontWeight: '500', fontSize: '4px' }}>
+                    <h6 style={{ fontWeight: '300',position:'relative',left:'6px', display: 'flex', justifyContent: 'space-between', fontSize: '4px', alignItems: 'center', textAlign: 'center',color:'#ffdd00' }}>powered by <span style={{ marginLeft: '2px', fontWeight: '500', fontSize: '4px' }}>
                       Rayyan
                     </span>
                     </h6>
@@ -200,8 +202,8 @@ const MassQRCodeGenerator = () => {
                 </div>
                 <div style={{position:'relative'}}>
 
-                  <img style={{ height: '55.7244px', width: '140.598px' }} src={logo} alt='Logo' />
-                  <h6 style={{position:'absolute',color:'#ffdd00',fontSize:'5px',bottom:'-5px',left:'35px'}}>@rayyan_progear_official</h6>
+                  <img style={{ height: '56.7244px', width: '138.598px' }} src={logo} alt='Logo' />
+                  <h6 style={{position:'absolute',color:'#ffdd00',fontSize:'6px',bottom:'-2px',left:'30px'}}>@rayyan_progear_official</h6>
                 </div>
               </div>
             </div>

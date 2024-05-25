@@ -24,6 +24,7 @@ const ConfirmationModal = ({ infoData, onClose, onSubmit }) => {
       <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
         <button id="btn" onClick={onSubmit} onTouchStart={onSubmit} style={{cursor:'pointer',padding:'10px 25px',backgroundColor:'#E42A3C',color:'white',margin:'10px 0',border:'none',borderRadius:'8px'}}>Confirm</button>
         <p><i style={{fontSize:'10px'}}><b>If any mistakes, make changes on the form above and save it.</b></i></p>
+        <p style={{textAlign:'center',lineHeight:'10px'}}><i style={{fontSize:'10px', color:'#E42A3C'}}><b>After clicking confirm, please wait for few seconds,<br /> details being entered into our database......</b></i></p>
       </div>
     </div>
   );
