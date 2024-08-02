@@ -46,7 +46,7 @@ const MassQRCodeGenerator = () => {
   const generateRandomString = () => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 16; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       randomString += characters[randomIndex];
     }
@@ -75,8 +75,9 @@ const MassQRCodeGenerator = () => {
               .qr-code-container {
                 display: flex;
                 flex-wrap: wrap;  
-                row-gap: 7.55px;
-                column-gap: 7.55px;
+                /* margin-top: 30px; */
+                row-gap: 	3.78px;
+                column-gap: 3.78px;
               }
               
               .qr-code-row {
@@ -108,17 +109,10 @@ const MassQRCodeGenerator = () => {
                 writing-mode: vertical-lr;
                 text-orientation: upright;
                 font-size: 4px;
-                letter-spacing: -2px;
+                letter-spacing: 1px;
               }
-              .float,.floatdiv{
-                position: absolute;
-              }
-              .float,.floatdiv>h6{
+              .floatdiv>h6{
                 font-size: 4px;
-              }
-              .float{
-                top: 3px;
-                left: 14px;
               }
               .floatdiv{
                 bottom: 2px;
@@ -129,6 +123,12 @@ const MassQRCodeGenerator = () => {
                 justify-content: space-around;
               }
               
+              .sideLines{
+                height: 100%;
+                width: 7px;
+                background-color: #ffdd00;
+              }
+                          
             </style>
           </head>
           <body>${printableContent}</body>
@@ -181,31 +181,22 @@ const MassQRCodeGenerator = () => {
       <div id='codecontainer' style={{}}>
         <div className="qr-code-container">
           {generatedCodes.map((code,index) => (
-            <div key={code.generatedCodes} className="qr-code active" style={{backgroundColor:'black', height: '73.18px', width: '216.052px' }}>
-                <div className="qr-code-content" style={{height:'100%',width:'100%'}}>
-                <div style={{ 
-                  display: 'flex', position: 'relative', height: '76.18px', width: '92.598px', alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <h6 className='float' style={{ zIndex:'100',fontSize: '5px', width: '100%',color:'#ffdd00' }}>SCAN FOR EMERGENCY/LOST</h6>
+            <div key={code.generatedCodes} className="qr-code active" style={{display:'flex', backgroundColor:'black', height: '171px', width: '134px', justifyContent:'space-around' }}>
+              <div className='sideLines'></div>
+              <div className="qr-code-content" style={{height:'100%',width:'50%',display:'flex', flexDirection:'column', justifyContent:'space-evenly', alignItems:'center', position:'relative'}}>
+                <h6 className='float' style={{ zIndex:'100',fontSize: '12.5px', display:'flex', flexDirection:'column', alignItems:'center', color:'#ffdd00' }}><span style={{fontSize:'8px',color:'white'}}>SCAN FOR</span> EMERGENCY</h6>
 
-                  <div className='floatdiv'>
-                    <h6 style={{ fontWeight: '300',position:'relative',left:'6px', display: 'flex', justifyContent: 'space-between', fontSize: '4px', alignItems: 'center', textAlign: 'center',color:'#ffdd00' }}>powered by <span style={{ marginLeft: '2px', fontWeight: '500', fontSize: '4px' }}>
-                      Rayyan
-                    </span>
-                    </h6>
-                  </div>
-                  <div className="tilted-wrapper">
-                    <p className="tilted-text" style={{color:'#ffdd00'}}>{code.uniqueIdentifier}</p>
-                  </div>
-                  <img src={code.qrCodeData} style={{ height: '55px', width: '55px',backgroundColor:'white',position:'relative',left:'5px' }} alt={`QR Code for ${code.uniqueIdentifier}`} />
-                </div>
-                <div style={{position:'relative'}}>
-
-                  <img style={{ height: '56.7244px', width: '138.598px' }} src={logo} alt='Logo' />
-                  <h6 style={{position:'absolute',color:'#ffdd00',fontSize:'6px',bottom:'-2px',left:'30px'}}>@rayyan_progear_official</h6>
-                </div>
+                {/* <div className="tilted-wrapper">
+                  <p className="tilted-text" style={{color:'#ffdd00'}}>{code.uniqueIdentifier}</p>
+                  </div> */}
+                  
+                <img src={code.qrCodeData} style={{zIndex:'100', height: '70px', width: '105%',backgroundColor:'white'}} alt={`QR Code for ${code.uniqueIdentifier}`} />
+                <h6 style={{ fontWeight: '300', display: 'flex', justifyContent: 'space-between', fontSize: '7.5px', alignItems: 'center', textAlign: 'center',color:'white' }}>powered by </h6>
+                <img style={{ height: '35px', width: '100%' }} src={logo} alt='Logo' />
+                <h6 style={{color:'white',fontSize:'6.5px'}}>@rayyan_progear_official</h6>
               </div>
+              <div className='sideLines'></div>
+
             </div>
           ))}
         </div>

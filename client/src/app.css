@@ -216,7 +216,6 @@ html{
   /* qr code section */
   .qr-code {
     display: flex;
-    flex-direction: column;
     align-items: center;
   }
   
@@ -352,9 +351,9 @@ html{
   .qr-code-container {
     display: flex;
     flex-wrap: wrap;  
-    margin-top: 30px;
-    row-gap: 7.55px;
-    column-gap: 7.55px;
+    /* margin-top: 30px; */
+    row-gap: 	3.78px;
+    column-gap: 3.78px;
   }
   
   .qr-code-row {
@@ -388,15 +387,8 @@ html{
     font-size: 4px;
     letter-spacing: 1px;
   }
-  .float,.floatdiv{
-    position: absolute;
-  }
-  .float,.floatdiv>h6{
+  .floatdiv>h6{
     font-size: 4px;
-  }
-  .float{
-    top: 3px;
-    left: 14px;
   }
   .floatdiv{
     bottom: 2px;
@@ -407,6 +399,11 @@ html{
     justify-content: space-around;
   }
   
+  .sideLines{
+    height: 100%;
+    width: 7px;
+    background-color: #ffdd00;
+  }
   
 
   /* lannding page */
