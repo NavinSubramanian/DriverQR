@@ -184,15 +184,15 @@ const MassQRCodeGenerator = () => {
             <div key={code.generatedCodes} className="qr-code active" style={{display:'flex', backgroundColor:'black', height: '171px', width: '134px', justifyContent:'space-around' }}>
               <div className='sideLines'></div>
               <div className="qr-code-content" style={{height:'100%',width:'50%',display:'flex', flexDirection:'column', justifyContent:'space-evenly', alignItems:'center', position:'relative'}}>
-                <h6 className='float' style={{ zIndex:'100',fontSize: '12.5px', display:'flex', flexDirection:'column', alignItems:'center', color:'#ffdd00' }}><span style={{fontSize:'8px',color:'white'}}>SCAN FOR</span> EMERGENCY</h6>
+                <h6 className='float' style={{ zIndex:'100',fontSize: '10.5px', display:'flex', flexDirection:'column', alignItems:'center', color:'#ffdd00' }}><span style={{fontSize:'6.5px',color:'white'}}>SCAN FOR</span> EMERGENCY</h6>
 
                 {/* <div className="tilted-wrapper">
                   <p className="tilted-text" style={{color:'#ffdd00'}}>{code.uniqueIdentifier}</p>
                   </div> */}
                   
-                <img src={code.qrCodeData} style={{zIndex:'100', height: '70px', width: '105%',backgroundColor:'white'}} alt={`QR Code for ${code.uniqueIdentifier}`} />
-                <h6 style={{ fontWeight: '300', display: 'flex', justifyContent: 'space-between', fontSize: '7.5px', alignItems: 'center', textAlign: 'center',color:'white' }}>powered by </h6>
-                <img style={{ height: '35px', width: '100%' }} src={logo} alt='Logo' />
+                <img src={code.qrCodeData} style={{zIndex:'100', height: '70px', width: '110%',backgroundColor:'white'}} alt={`QR Code for ${code.uniqueIdentifier}`} />
+                <h6 style={{ fontWeight: '300', display: 'flex', justifyContent: 'space-between', fontSize: '7.5px', alignItems: 'center', textAlign: 'center',color:'white',textTransform:'uppercase' }}>powered by </h6>
+                <img style={{ height: '45px', width: '150%' }} src={logo} alt='Logo' />
                 <h6 style={{color:'white',fontSize:'6.5px'}}>@rayyan_progear_official</h6>
               </div>
               <div className='sideLines'></div>
