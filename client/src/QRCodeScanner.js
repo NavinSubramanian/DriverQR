@@ -179,7 +179,7 @@ function QRCodeScanner() {
               backgroundColor: 'black',
             }}
           >
-            <h3 style={{color:'red',textAlign:'center'}}>Expire date : {expDate}</h3>
+            {/* <h3 style={{color:'red',textAlign:'center'}}>Expire date : {expDate}</h3> */}
             <form>
               <div
                 style={{
@@ -399,6 +399,12 @@ function InfoPrompt({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!infoData.personName || !infoData.age || !infoData.gender || !infoData.phoneNumber || !infoData.emergencyNumber || !infoData.bloodGroup || !infoData.address) {
+      alert('Please fill out all required fields');
+      return;
+    }
+
     onSubmit(infoData);
   };
 

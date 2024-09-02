@@ -120,9 +120,19 @@ app.post('/update-details', async (req, res) => {
 
 app.get('/users', async (req, res) => {
   try {
-    const users = await User.find();
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 100; 
+    const skip = (page - 1) * limit; 
     
-    res.status(200).json(users);
+    const users = await User.find({ 'userDetails.personName': { $exists: true, $ne: null, $ne: '' } }).skip(skip).limit(limit);
+    const totalUsers = await User.countDocuments({ 'userDetails.personName': { $exists: true, $ne: null, $ne: '' } }); // Total number of users
+
+    res.status(200).json({
+      users,
+      totalPages: Math.ceil(totalUsers / limit), // Total number of pages
+      currentPage: page, // Current page number
+    });
+
   } catch (error) {
     console.error('Error fetching users:', error);
     res.status(500).json({ message: 'Error fetching users' });

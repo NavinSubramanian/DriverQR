@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -17,49 +16,41 @@ import {
   GridRowEditStopReasons,
   GridToolbar,
 } from '@mui/x-data-grid';
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomId,
-  randomArrayItem,
-} from '@mui/x-data-grid-generator';
-
 import { Container } from '@mui/material';
 import Footer from './components/Footer';
 import { Link } from 'react-router-dom';
 
-
-const roles = ['Market', 'Finance', 'Development'];
-const randomRole = () => {
-  return randomArrayItem(roles);
-};
-
-
 export default function FullFeaturedCrudGrid() {
-  const [rows, setRows] = React.useState([]);
+  const [rows, setRows] = useState([]);
+  const [rowModesModel, setRowModesModel] = useState({});
+  const [page, setPage] = useState(1); // Current page state
+  const [totalPages, setTotalPages] = useState(0); // Total pages state
+  const [pageSize, setPageSize] = React.useState(50);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://driver-qr.vercel.app/users');
-        // Transform the user data to match the column fields
-        const transformedUsers = response.data
-          .filter(user => user.userDetails && user.userDetails.personName) // Filter out undefined or missing data
+        const response = await axios.get(`https://driver-qr.vercel.app/users?page=${page}&limit=100`);
+        const { users, totalPages } = response.data;
+
+        const transformedUsers = users
+          .filter(user => user.userDetails && user.userDetails.personName)
           .map((user, index) => ({
             ...user.userDetails,
-            id: index + 1,
+            // id: index + 1 + (page - 1) * 10, 
+            id: index + 1, 
             _id: user._id,
           }));
+
         setRows(transformedUsers);
+        setTotalPages(totalPages);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
     };
 
     fetchUsers();
-  }, []);
-
-  const [rowModesModel, setRowModesModel] = React.useState({});
+  }, [page]);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -92,19 +83,14 @@ export default function FullFeaturedCrudGrid() {
   };
 
   const processRowUpdate = async (userDetails) => {
-    console.log(userDetails)
     const updatedRow = { ...userDetails, isNew: false };
-    setRows(rows.map((row) => (row.id === userDetails.id ?
-      updatedRow
-      :
-      row)));
+    setRows(rows.map((row) => (row.id === userDetails.id ? updatedRow : row)));
     try {
       const response = await axios.put(`https://driver-qr.vercel.app/users/${userDetails._id}`, { userDetails });
-      console.log(response.data)
-      return updatedRow
+      return updatedRow;
     } catch (error) {
       console.error('Error updating user:', error);
-      return updatedRow
+      return updatedRow;
     }
   };
 
@@ -204,9 +190,7 @@ export default function FullFeaturedCrudGrid() {
             <GridActionsCellItem
               icon={<SaveIcon />}
               label="Save"
-              sx={{
-                color: 'primary.main',
-              }}
+              sx={{ color: 'primary.main' }}
               onClick={handleSaveClick(id)}
             />,
             <GridActionsCellItem
@@ -227,23 +211,39 @@ export default function FullFeaturedCrudGrid() {
             onClick={handleEditClick(id)}
             color="inherit"
           />,
-          // <GridActionsCellItem
-          //   icon={<DeleteIcon />}
-          //   label="Delete"
-          //   onClick={handleDeleteClick(id)}
-          //   color="inherit"
-          // />,
         ];
       },
     },
   ];
 
+  // Pagination control functions
+  const handlePreviousPage = () => {
+    setPage((prev) => Math.max(prev - 1, 1)); // Prevent going below page 1
+  };
+
+  const handleNextPage = () => {
+    setPage((prev) => Math.min(prev + 1, totalPages)); // Prevent going above total pages
+  };
+
   return (
     <>
-      <nav style={{padding:'20px',backgroundColor:'black'}}>
-        <Link to="/" style={{color:'black',textDecoration:'none'}}><button style={{padding:'7px 18px',fontWeight:'500',backgroundColor:'#FFDD00',border:'none',borderRadius:'5px',cursor:'pointer'}}>Back</button></Link>
+      <nav style={{ padding: '20px', backgroundColor: 'black' }}>
+        <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
+          <button
+            style={{
+              padding: '7px 18px',
+              fontWeight: '500',
+              backgroundColor: '#FFDD00',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            Back
+          </button>
+        </Link>
       </nav>
-      <div style={{marginBottom:'50px',padding:'20px'}}>
+      <div style={{ marginBottom: '50px', padding: '20px' }}>
         <Box
           sx={{
             height: 700,
@@ -276,6 +276,16 @@ export default function FullFeaturedCrudGrid() {
             }}
           />
         </Box>
+
+        {/* Pagination Buttons */}
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+          <Button onClick={handlePreviousPage} disabled={page <= 1}>
+            Previous Page
+          </Button>
+          <Button onClick={handleNextPage} disabled={page >= totalPages}>
+            Next Page
+          </Button>
+        </div>
       </div>
 
       <Footer />
