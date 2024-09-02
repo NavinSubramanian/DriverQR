@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 app.use(cors()); 
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://admin:1234@qrcode.x6cwqeu.mongodb.net/?retryWrites=true&w=majority&appName=Qrcode', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+mongoose.connect('mongodb+srv://admin:1234@qrcode.x6cwqeu.mongodb.net/?retryWrites=true&w=majority&appName=Qrcode',{
+  retryWrites: true,
+  w: 'majority',
 });
 const db = mongoose.connection;
 db.once('open', () => console.log('Connected to MongoDB'));
