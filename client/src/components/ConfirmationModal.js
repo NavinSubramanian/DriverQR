@@ -1,12 +1,12 @@
 import React from 'react';
 
-const ConfirmationModal = ({ infoData, onClose, onSubmit }) => {
-  
+const ConfirmationModal = ({ infoData, onClose, onSubmit, isSubmitting }) => {
+
   return (
-    <div style={{marginTop:'50px',marginBottom:'200px'}}>
-      <div className="confirmation-modal" style={{padding:'20px',margin:'10px',borderRadius:'20px',border:'2px solid rgb(0 0 0 / 30%)'}}>
-        <h2 style={{fontSize:'23px'}}>Confirm Your Information</h2>
-        <hr style={{margin:'10px 0'}} />
+    <div style={{ marginTop: '50px', marginBottom: '200px' }}>
+      <div className="confirmation-modal" style={{ padding: '20px', margin: '10px', borderRadius: '20px', border: '2px solid rgb(0 0 0 / 30%)' }}>
+        <h2 style={{ fontSize: '23px' }}>Confirm Your Information</h2>
+        <hr style={{ margin: '10px 0' }} />
         <div>
           <p><b style={{}}>Name:</b> {infoData.personName}</p>
           <p><b style={{}}>Age:</b> {infoData.age}</p>
@@ -21,10 +21,27 @@ const ConfirmationModal = ({ infoData, onClose, onSubmit }) => {
           <p><b style={{}}>Doctor:</b> {infoData.doctor === "" ? "Nil" : infoData.doctor}</p>
         </div>
       </div>
-      <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
-        <button id="btn" onClick={onSubmit} onTouchStart={onSubmit} style={{cursor:'pointer',padding:'10px 25px',backgroundColor:'#E42A3C',color:'white',margin:'10px 0',border:'none',borderRadius:'8px'}}>Confirm</button>
-        <p><i style={{fontSize:'10px'}}><b>If any mistakes, make changes on the form above and save it.</b></i></p>
-        <p style={{textAlign:'center',lineHeight:'10px'}}><i style={{fontSize:'10px', color:'#E42A3C'}}><b>After clicking confirm, please wait for few seconds,<br /> details being entered into our database......</b></i></p>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+        <button
+          id="btn"
+          onClick={onSubmit}
+          onTouchStart={onSubmit}
+          disabled={isSubmitting}
+          style={{
+            cursor: isSubmitting ? 'not-allowed' : 'pointer',
+            padding: '10px 25px',
+            backgroundColor: '#E42A3C',
+            color: 'white',
+            margin: '10px 0',
+            border: 'none',
+            borderRadius: '8px',
+            opacity: isSubmitting ? 0.6 : 1,
+          }}
+        >
+          {isSubmitting ? "Saving..." : "Confirm"}
+        </button>
+        <p><i style={{ fontSize: '10px' }}><b>If any mistakes, make changes on the form above and save it.</b></i></p>
+        <p style={{ textAlign: 'center', lineHeight: '10px' }}><i style={{ fontSize: '10px', color: '#E42A3C' }}><b>After clicking confirm, please wait for few seconds,<br /> details being entered into our database......</b></i></p>
       </div>
     </div>
   );

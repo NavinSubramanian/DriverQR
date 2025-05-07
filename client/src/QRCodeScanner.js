@@ -24,6 +24,7 @@ function QRCodeScanner() {
   const [error, setError] = useState(null);
   const [showInfoPrompt, setShowInfoPrompt] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [expDate, setExpDate] = useState('')
   const { uniqueNumber } = useParams();
   const [infoData, setInfoData] = useState({
@@ -94,20 +95,20 @@ function QRCodeScanner() {
   };
 
   const handleSubmit = async () => {
+    setIsSubmitting(true); // Show loading / disable confirm button
     try {
-      // Send request to backend
       await axios.post("https://driver-qr.vercel.app/update-details", {
         uniqueIdentifier: uniqueNumber,
         userDetails: infoData,
       });
       console.log("User details saved successfully:");
       setShowConfirmationModal(false);
-      window.location.reload();
+      window.location.reload(); // Optional: could be moved after fetch
       await fetchUserDetails();
-      // Handle success message or redirect to another page
     } catch (error) {
       console.error("Error saving user details:", error.message);
-      // Handle error message or display it to the user
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -366,6 +367,7 @@ function QRCodeScanner() {
           infoData={infoData}
           onClose={() => setShowConfirmationModal(false)}
           onSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
         />
       }
       <Footer2 />

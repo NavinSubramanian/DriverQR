@@ -352,8 +352,8 @@ html{
     display: flex;
     flex-wrap: wrap;  
     /* margin-top: 30px; */
-    row-gap: 	3.78px;
-    column-gap: 3.78px;
+    /* row-gap: 	3.78px;
+    column-gap: 3.78px; */
   }
   
   .qr-code-row {
