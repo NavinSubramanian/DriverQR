@@ -300,7 +300,7 @@ function QRCodeScanner() {
                   <p><b>Gender:</b> {userDetails.gender}</p>
                   <p><b>Age:</b> {userDetails.age}</p>
                   <p><b>Contact no:</b> {userDetails.phoneNumber}</p>
-                  <p><b>Emergency contact:</b> {userDetails.emergencyNumber}</p>
+                  <p><b>Emergency contact:</b> <a href={`tel:${userDetails.emergencyNumber}`} style={{color:"white", textDecoration:"none"}}>📞{userDetails.emergencyNumber}</a></p>
                   <p><b>Address:</b> {userDetails.address}</p>
                 </div>
               </div>
